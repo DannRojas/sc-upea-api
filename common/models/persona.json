@@ -1,0 +1,33 @@
+{
+  "name": "persona",
+  "base": "PersistedModel",
+  "idInjection": false,
+  "options": {
+    "validateUpsert": true
+  },
+  "properties": {
+    "ci_persona": {
+      "type": "string",
+      "id": true,
+      "required": true
+    },
+    "nombres": {
+      "type": "string",
+      "required": true
+    },
+    "apellidos": {
+      "type": "string",
+      "required": true
+    }
+  },
+  "validations": [],
+  "relations": {
+    "ci_persona_fk": {
+      "type": "hasMany",
+      "model": "administrador",
+      "foreignKey": "ci_persona_fk"
+    }
+  },
+  "acls": [],
+  "methods": {}
+}

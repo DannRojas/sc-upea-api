@@ -1,0 +1,22 @@
+{
+  "db": {
+    "name": "db",
+    "connector": "memory"
+  },
+  "mysql": {
+    "host": "localhost",
+    "port": 3306,
+    "url": "",
+    "database": "sc-upea-db",
+    "password": "",
+    "name": "mysql",
+    "user": "root",
+    "connector": "mysql"
+  },
+  "files_local": {
+    "name": "files_local",
+    "connector": "loopback-component-storage",
+    "provider": "filesystem",
+    "root": "./server/local-storage"
+  }
+}

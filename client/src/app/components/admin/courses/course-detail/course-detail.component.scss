@@ -1,0 +1,35 @@
+.title {
+    font-size: 2rem;
+}
+
+.view {
+    overflow  : hidden;
+    .mask{
+        display: none;
+    }
+}
+
+.view:hover {
+
+    img {
+        transition       : all .5s ease-in-out;
+        -webkit-transform: scale(1.3);
+        transform        : scale(1.1);
+    }
+
+    .mask {
+        transition      : all .5s ease-in-out;
+        content         : "";
+        width           : 100%;
+        height          : 100%;
+        position        : absolute;
+        top             : 0;
+        right           : 0;
+        background-color: rgba(0, 0, 0, 0.493);
+    }
+}
+
+img {
+    transform : scale(1);
+    transition: all .5s ease-in-out;
+}

@@ -1,0 +1,31 @@
+.bg-img{
+    margin: 0;
+    // min-height: 100vh;
+    background-image: url(./../../../../assets/img/modal.jpeg);
+    background-repeat: no-repeat;
+    background-size: cover;
+    background-position: center;
+}
+
+.bg-mask{
+    margin: 0;
+    background: rgba(0, 0, 0, 0.548);
+}
+
+.title{
+    font-size: 2em;
+    margin-bottom: 0;
+    display: block !important;
+    text-align: center !important;
+    margin-top: 15%;
+    padding-left: 4%;
+}
+
+.title-sie{
+    margin-top: 10px;
+    font-size: 2.5em;
+    font-weight: bold;
+    display: block !important;
+    text-align: center !important;
+    // padding-left: 10%;
+}

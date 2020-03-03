@@ -1,0 +1,59 @@
+{
+  "name": "capacitacion",
+  "plural": "capacitaciones",
+  "base": "PersistedModel",
+  "idInjection": false,
+  "options": {
+    "validateUpsert": true
+  },
+  "properties": {
+    "id_capacitacion": {
+      "type": "number",
+      "id": true
+    },
+    "nombre": {
+      "type": "string",
+      "required": true
+    },
+    "descripcion": {
+      "type": "string",
+      "required": true
+    },
+    "costo": {
+      "type": "number",
+      "required": true
+    },
+    "duracion": {
+      "type": "string",
+      "required": true
+    },
+    "expositor": {
+      "type": "string",
+      "required": true
+    },
+    "fecha_inicio": {
+      "type": "date",
+      "required": true
+    },
+    "fecha_fin": {
+      "type": "date",
+      "required": true
+    },
+    "fecha_inicio_insc": {
+      "type": "date",
+      "required": true
+    },
+    "fecha_fin_insc": {
+      "type": "date",
+      "required": true
+    },
+    "imagen": {
+      "type": "string",
+      "required": true
+    }
+  },
+  "validations": [],
+  "relations": {},
+  "acls": [],
+  "methods": {}
+}

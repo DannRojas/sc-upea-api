@@ -1,0 +1,17 @@
+.background{
+    margin: 0;
+    min-height: 100vh;
+    background-image: url(../assets/img/Informatica.jpg);
+    background-repeat: no-repeat;
+    background-size: cover;
+    background-position: center;
+    background-attachment: fixed;
+}
+
+.mask{
+    margin: 0;
+    min-height: 100vh;
+    background: rgba(0, 0, 0, 0.404);
+    background-size: cover;
+    background-attachment: fixed !important;
+}

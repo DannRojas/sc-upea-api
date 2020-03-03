@@ -1,0 +1,46 @@
+// .background{
+//     margin: 0;
+//     min-height: 100vh;
+//     background-image: url(../../../assets/img/Informatica.jpg);
+//     background-repeat: no-repeat;
+//     background-size: cover;
+//     background-position: center;
+//     background-attachment: fixed;
+// }
+
+// .mask{
+//     margin: 0;
+//     min-height: 100vh;
+//     background: rgba(0, 0, 0, 0.404);
+//     background-size: cover;
+//     background-attachment: fixed !important;
+// }
+
+.container{
+    position: relative;
+}
+
+.img-car{
+    width: 90%;
+    height: auto;
+    margin: auto;
+    border-radius: 15px;
+}
+
+.card{
+    border-radius: 15px;
+}
+
+.img-slider{
+    width: 100%;
+    height: auto;
+}
+
+.title{
+    font-size: 40px;
+}
+
+.name-cap{
+    border-bottom: 3px solid;
+    text-align: center;
+}

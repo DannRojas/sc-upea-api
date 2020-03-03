@@ -1,0 +1,43 @@
+<!-- Modal -->
+<div class="modal fade" id="loginModal" tabindex="-1" role="dialog" aria-labelledby="loginModalLabel"
+    aria-hidden="true">
+    <div class="modal-dialog" role="document">
+        <div class="modal-content bg-img">
+            <div class="bg-mask">
+                <!-- <div class="modal-header"> -->
+                <button type="button" class="close white-text m-3" data-dismiss="modal" aria-label="Close">
+                    <span aria-hidden="true">&times;</span>
+                </button>
+                <!-- </div> -->
+                <h2 class="white-text font-weight-bold title">Inicio de Sesión</h2>
+                <h2 class="text-primary title-sie">SIE</h2>
+                <div class="modal-body">
+                    <form [formGroup]="loginForm" (ngSubmit)="onLogin()" class="example-form text-center">
+                        <h2>
+                            <mat-form-field appearance="legacy" class="col-8">
+                                <mat-label>Nombre de usuario</mat-label>
+                                <input type="text" matInput formControlName="userName" required>
+                                <mat-error *ngIf="userName.invalid">El nombre de usuario es incorrecto</mat-error>
+                            </mat-form-field>
+                        </h2>
+                        <h2>
+                            <mat-form-field appearance="legacy" class="col-8">
+                                <mat-label>Contraseña</mat-label>
+                                <input matInput [type]="hide ? 'password' : 'text'" formControlName="userPassword" required>
+                                <button mat-icon-button matSuffix (click)="hide = !hide"
+                                    [attr.aria-label]="'Hide password'" [attr.aria-pressed]="hide">
+                                    <mat-icon>{{hide ? 'visibility_off' : 'visibility'}}</mat-icon>
+                                </button>
+                                <mat-error *ngIf="userPassword.invalid">La contraseña es incorrecta</mat-error>
+                            </mat-form-field>
+                        </h2>
+                        <div class="mt-1" *ngIf="isError">
+                            <h2><span class="badge badge-pill badge-danger">Usuario o contraseña incorrectos</span></h2>
+                        </div>
+                        <button type="submit" class="btn btn-primary mb-5 mt-4">Ingresar</button>
+                    </form>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
