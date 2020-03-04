@@ -2,17 +2,103 @@
     <div class="row mt">
         <h2 class="mx-auto text-primary font-weight-bold title">Detalle Capacitación</h2>
     </div>
-    <div class="row mt-2">
-        <div class="col-lg-6 p-0 view">
-            <img [src]="capacitation.pathImagen" class="img-fluid">
-            <div class="mask d-flex">
-                <button mat-mini-fab aria-label="icon-button with a heart icon">
-                    <mat-icon>favorite</mat-icon>
-                </button>
+
+    <!-- <div class="card"> -->
+        <form class="row mt-2 example-form">
+            <div class="col-lg-6 p-0 view">
+                <img [src]="capacitation?.pathImagen" class="img-fluid">
+                <div class="mask">
+                    <button mat-raised-button color="primary">
+                        Subir Imagen <mat-icon>backup</mat-icon>
+                    </button>
+                </div>
             </div>
-        </div>
-        <div class="col-lg-6">
-            <h2 class="font-weight-bold white-text text-center">{{capacitation.nombre}}</h2>
-        </div>
+            <div class="col-lg-6">
+                <h2 class="mb-0">
+                    <mat-form-field class="float-left w-65">
+                        <mat-label>Nombre de la capacitación</mat-label>
+                        <input matInput placeholder="Nombre de la capacitación">
+                    </mat-form-field>
+                    <mat-form-field class="float-right w-30">
+                        <mat-label>Costo</mat-label>
+                        <input matInput placeholder="Costo">
+                    </mat-form-field>
+                </h2>
+                <h4 class="white-text mb-0">Fechas de Inscripcion:</h4>
+                <mat-form-field class="float-left w-45">
+                    <mat-label>Fecha Inicio</mat-label>
+                    <input matInput [matDatepicker]="dateInscInit">
+                    <mat-datepicker-toggle matSuffix [for]="dateInscInit"></mat-datepicker-toggle>
+                    <mat-datepicker #dateInscInit></mat-datepicker>
+                </mat-form-field>
+                <mat-form-field class="float-right w-45">
+                    <mat-label>Fecha Fin</mat-label>
+                    <input matInput [matDatepicker]="dateInscEnd">
+                    <mat-datepicker-toggle matSuffix [for]="dateInscEnd"></mat-datepicker-toggle>
+                    <mat-datepicker #dateInscEnd></mat-datepicker>
+                </mat-form-field>
+
+                <h4 class="white-text mb-0">Fechas de la Capacitación:</h4>
+                <mat-form-field class="float-left w-45">
+                    <mat-label>Fecha Inicio</mat-label>
+                    <input matInput [matDatepicker]="dateCapInit">
+                    <mat-datepicker-toggle matSuffix [for]="dateCapInit"></mat-datepicker-toggle>
+                    <mat-datepicker #dateCapInit></mat-datepicker>
+                </mat-form-field>
+                <mat-form-field class="float-right w-45">
+                    <mat-label>Fecha Fin</mat-label>
+                    <input matInput [matDatepicker]="dateCapEnd">
+                    <mat-datepicker-toggle matSuffix [for]="dateCapEnd"></mat-datepicker-toggle>
+                    <mat-datepicker #dateCapEnd></mat-datepicker>
+                </mat-form-field>
+
+                <mat-form-field class="float-left w-45">
+                    <mat-label>Expositor /es</mat-label>
+                    <input matInput placeholder="Nombre de la capacitación">
+                </mat-form-field>
+                <mat-form-field class="float-right w-45">
+                    <mat-label>Duración</mat-label>
+                    <input matInput placeholder="Nombre de la capacitación">
+                </mat-form-field>
+            </div>
+            <mat-form-field class="w-100 mt-3">
+                <mat-label>Descripción</mat-label>
+                <textarea matInput></textarea>
+            </mat-form-field>
+        </form>
+    <!-- </div> -->
+
+    <div class="py-5">
+        <table class="table table-striped table-dark">
+            <thead>
+                <tr>
+                    <th scope="col">#</th>
+                    <th scope="col">First</th>
+                    <th scope="col">Last</th>
+                    <th scope="col">Handle</th>
+                </tr>
+            </thead>
+            <tbody>
+                <tr>
+                    <th scope="row">1</th>
+                    <td>Mark</td>
+                    <td>Otto</td>
+                    <td>@mdo</td>
+                </tr>
+                <tr>
+                    <th scope="row">2</th>
+                    <td>Jacob</td>
+                    <td>Thornton</td>
+                    <td>@fat</td>
+                </tr>
+                <tr>
+                    <th scope="row">3</th>
+                    <td>Larry</td>
+                    <td>the Bird</td>
+                    <td>@twitter</td>
+                </tr>
+            </tbody>
+        </table>
     </div>
+
 </div>

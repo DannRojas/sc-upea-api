@@ -1,6 +1,6 @@
 import { AuthService } from './../../../services/auth.service';
 import { Component, OnInit } from '@angular/core';
-import { FormGroup, FormControl, Validators } from '@angular/forms';
+import { FormGroup, FormControl, Validators, FormBuilder } from '@angular/forms';
 
 @Component({
   selector: 'app-login',
@@ -13,16 +13,16 @@ export class LoginComponent implements OnInit {
   public isError:boolean = false;
   public loginForm: FormGroup;
 
-  constructor(private authService: AuthService) {  }
+  constructor(private authService: AuthService, private formBuilder: FormBuilder) {  }
 
   ngOnInit(): void {
     this.Validations();
   }
 
   Validations(){
-    this.loginForm = new FormGroup({
-      userName: new FormControl(null, [Validators.required, Validators.minLength(5)]),
-      userPassword: new FormControl(null, [Validators.required, Validators.minLength(5)])
+    this.loginForm = this.formBuilder.group({
+      userName: ['', [Validators.required, Validators.minLength(5)]],
+      userPassword: ['', [Validators.required, Validators.minLength(5)]]
     });
   }
 
@@ -49,6 +49,10 @@ export class LoginComponent implements OnInit {
   get userPassword() { return this.loginForm.get('userPassword'); }
 
   onReset() {
-    this.loginForm.reset();
+    this.isError = false;
+    this.loginForm.patchValue({
+      userName: '',
+      userPassword: ''
+    })
   }
 }

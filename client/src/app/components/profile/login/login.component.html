@@ -17,7 +17,7 @@
                             <mat-form-field appearance="legacy" class="col-8">
                                 <mat-label>Nombre de usuario</mat-label>
                                 <input type="text" matInput formControlName="userName" required>
-                                <mat-error *ngIf="userName.invalid">El nombre de usuario es incorrecto</mat-error>
+                                <mat-error *ngIf="userName.invalid && (userName.dirty || userName.touched)">El nombre de usuario es incorrecto</mat-error>
                             </mat-form-field>
                         </h2>
                         <h2>
@@ -34,7 +34,7 @@
                         <div class="mt-1" *ngIf="isError">
                             <h2><span class="badge badge-pill badge-danger">Usuario o contraseña incorrectos</span></h2>
                         </div>
-                        <button type="submit" class="btn btn-primary mb-5 mt-4">Ingresar</button>
+                        <button type="submit" class="btn btn-primary mb-5 mt-4" [disabled]="loginForm.invalid">Ingresar</button>
                     </form>
                 </div>
             </div>
