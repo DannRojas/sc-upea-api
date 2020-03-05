@@ -16,10 +16,13 @@ export class CourseDetailComponent implements OnInit {
 
   public capacitation: CapacitationInterface;
   startDate = new Date(1990, 0, 1);
+  public image: File = null;
 
   ngOnInit(): void {
     const idCapacitation = this._activatedRoute.snapshot.params['id'];
-    this.getCapacitation(idCapacitation);
+    if(idCapacitation!=="0"){
+      this.getCapacitation(idCapacitation);
+    }
   }
 
   getCapacitation(idCapacitation){
@@ -36,6 +39,19 @@ export class CourseDetailComponent implements OnInit {
           reader.readAsDataURL(blob);
       })
     })
+  }
+
+  onFileSelected(image){
+    try{
+      this.image = image.target.files[0];
+      const reader = new FileReader();
+      reader.readAsDataURL(this.image);
+      reader.onload = () => {
+        this.capacitation.pathImagen = reader.result.toString();
+      }
+    }catch(e) {
+      this.capacitation.pathImagen = "../../../../assets/img/404imagen.png";
+    }
   }
 
 }
