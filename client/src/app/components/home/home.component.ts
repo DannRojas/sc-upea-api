@@ -6,6 +6,8 @@ import { Subject } from 'rxjs';
 import { takeUntil } from 'rxjs/operators';
 import { InscriptionModalComponent } from '../inscription-modal/inscription-modal.component';
 
+import { ToastrService } from 'ngx-toastr';
+
 @Component({
   selector: 'app-home',
   templateUrl: './home.component.html',
@@ -16,13 +18,14 @@ export class HomeComponent implements OnInit, OnDestroy {
   private unsubscribe$ = new Subject<void>();
   public capacitations: CapacitationInterface[];
 
-  constructor(private capacitationService: CapacitationService, private imageService: ImageService) { }
+  constructor(private capacitationService: CapacitationService, private imageService: ImageService, private toastrService: ToastrService) { }
 
   @ViewChild(InscriptionModalComponent)
   inscriptionModalComponent: InscriptionModalComponent;
 
   ngOnInit(): void {
     this.getListCapacitations();
+    // this.toastrService.info("Este es un mensaje","Titulo",{closeButton: true, timeOut: 1000, });
   }
 
   getListCapacitations(): void {

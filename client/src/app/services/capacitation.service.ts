@@ -44,7 +44,7 @@ export class CapacitationService {
     return this.http.put<CapacitationInterface>(url_api, this.capacitation, { headers: this.headers }).pipe(map(data => data))
   }
 
-  deleteCapacitation(id: string) {
+  deleteCapacitation(id: number) {
     //TODO: get token
     const token = this.authService.getToken();
     const url_api = `${this.url_api}/${id}?access_token=${token}`;
