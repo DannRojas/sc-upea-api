@@ -1,40 +1,46 @@
 <!-- <div class="background"> -->
-    <div class="container">
-        <div class="row mt">
-            <div class="table-responsive">
+<div class="container mt">
 
-                <table class="table table-striped table-dark">
-                    <thead>
-                        <tr>
-                            <th scope="col"></th>
-                            <th scope="col" class="align-middle">Nombre</th>
-                            <th scope="col" class="align-middle">Costo</th>
-                            <th scope="col" class="align-middle">Fechas Inscripcion</th>
-                            <th scope="col" class="align-middle">Fechas Capacitacion</th>
-                            <th scope="col" class="align-middle">Expositor</th>
-                            <th scope="col"><span data-toggle="tooltip" data-placement="top"
-                                    title="Nueva Capacitación" data-toggle="modal" data-target=".bd-example-modal-lg"><i class="fas fa-plus-circle xl"></i></span></th>
-                        </tr>
-                    </thead>
-                    <tbody>
-                        <tr *ngFor="let capacitation of capacitations">
-                            <th scope="row"><img [src]="capacitation?.pathImagen" class="img-fluid" height="45"
-                                    width="70"></th>
-                            <td class="align-middle"><span [routerLink]="'/course/'+capacitation.id_capacitacion">{{capacitation.nombre}}</span></td>
-                            <td class="align-middle">{{capacitation.costo}}</td>
-                            <td class="align-middle">{{capacitation.fecha_inicio.toLocaleDateString()}} -
-                                {{capacitation.fecha_fin.toLocaleDateString()}}</td>
-                            <td class="align-middle">{{capacitation.fecha_inicio_insc.toLocaleDateString()}} -
-                                {{capacitation.fecha_fin_insc.toLocaleDateString()}}</td>
-                            <td class="align-middle">{{capacitation.expositor}}</td>
-                            <td class="align-middle"><span class="mr-3" data-toggle="tooltip" data-placement="top" title="Modificar" [routerLink]="'/course/'+capacitation.id_capacitacion"><i class="fas fa-edit"></i></span> <span data-toggle="tooltip" data-placement="top"
-                                    title="Eliminar"><i class="fas fa-trash-alt"></i></span></td>
-                        </tr>
-                    </tbody>
-                </table>
-            </div>
+    <div class="d-block text-center">
+        <span class="white-text badge badge-pill badge-title d-block">
+            <p class="title mx-auto">Capacitaciones</p>
+        </span>
+    </div>
+
+    <div class="row mt-5">
+        <div class="table-responsive">
+
+            <table class="table table-striped table-dark">
+                <thead>
+                    <tr>
+                        <th scope="col"></th>
+                        <th scope="col" class="align-middle">Nombre</th>
+                        <th scope="col" class="align-middle">Costo</th>
+                        <th scope="col" class="align-middle">Fechas Inscripcion</th>
+                        <th scope="col" class="align-middle">Fechas Capacitacion</th>
+                        <th scope="col" class="align-middle">Expositor</th>
+                        <th scope="col"><span routerLink="/course/0" data-toggle="tooltip" data-placement="top" title="Nueva Capacitación"><i class="fas fa-plus-circle xl"></i></span></th>
+                    </tr>
+                </thead>
+                <tbody>
+                    <tr *ngFor="let capacitation of capacitations">
+                        <th scope="row"><img [src]="capacitation?.pathImagen" class="img-fluid" height="45" width="70">
+                        </th>
+                        <td class="align-middle"><span [routerLink]="'/course/'+capacitation.id_capacitacion">{{capacitation.nombre}}</span>
+                        </td>
+                        <td class="align-middle">{{capacitation.costo}}</td>
+                        <td class="align-middle">{{capacitation.fecha_inicio.toLocaleDateString()}} -
+                            {{capacitation.fecha_fin.toLocaleDateString()}}</td>
+                        <td class="align-middle">{{capacitation.fecha_inicio_insc.toLocaleDateString()}} -
+                            {{capacitation.fecha_fin_insc.toLocaleDateString()}}</td>
+                        <td class="align-middle">{{capacitation.expositor}}</td>
+                        <td class="align-middle"><span class="mr-3" data-toggle="tooltip" data-placement="top" title="Modificar" [routerLink]="'/course/'+capacitation.id_capacitacion"><i class="fas fa-edit"></i></span> <span (click)="onPreDelete(capacitation)" data-toggle="tooltip" data-placement="top" title="Eliminar"><i class="fas fa-trash-alt"></i></span></td>
+                    </tr>
+                </tbody>
+            </table>
         </div>
     </div>
+</div>
 <!-- </div> -->
 
-<app-modal-courses></app-modal-courses>
+<app-confirm-modal (confirmAction)="onDeleteCapacitation($event)"></app-confirm-modal>

@@ -1,29 +1,34 @@
-<div class="container">
-    <div class="row mt">
-        <h2 class="mx-auto text-primary font-weight-bold title">Detalle Capacitación</h2>
+<div class="container mt">
+    <div class="d-block text-center">
+        <span class="white-text badge badge-pill badge-title d-block">
+            <p class="title mx-auto">Detalle Capacitación</p>
+        </span>
     </div>
 
-    <div class="container-fluid card bg-dark-strong">
-        <form class="row mt-2 mt-3 example-form">
-            <div class="col-lg-6 p-0 pl-3 view">
+    <div class="container-fluid card bg-dark-strong mt-4 pb-3">
+        <form class="row mt-2 mt-3" (ngSubmit)="onAddOrUpdate()" #capacitationForm="ngForm">
+            <div class="col-lg-6 p-0 px-2 view">
                 <input type="file" (change)="onFileSelected($event)" accept='image/*' class="d-none" #fileInput>
                 <img [src]="capacitation?.pathImagen" class="img-fluid">
                 <div class="mask">
-                    <button mat-raised-button color="primary" (click)="fileInput.click()">
+                    <button mat-raised-button [disabled]="isDisabled" type="button" color="primary" (click)="fileInput.click()">
                         Subir Imagen <mat-icon>backup</mat-icon>
                     </button>
                 </div>
             </div>
-            <div class="col-lg-6">
+            <div class="col-lg-6 my-auto">
                 <div class="row">
                     <h2 class="container mb-0 w-100">
-                        <mat-form-field class="float-left w-65">
+                        <mat-form-field class="float-left w-75">
                             <mat-label>Nombre de la capacitación</mat-label>
-                            <input matInput placeholder="Nombre de la capacitación">
+                            <input matInput [disabled]="isDisabled" placeholder="Nombre de la capacitación" name="nombre" [(ngModel)]="capacitation.nombre" #nombre="ngModel" required>
+                            <mat-error *ngIf="nombre.invalid && (nombre.dirty || nombre.touched)">El nombre es requerido</mat-error>
                         </mat-form-field>
-                        <mat-form-field class="float-right w-30">
+                        <mat-form-field class="float-right w-20">
                             <mat-label>Costo</mat-label>
-                            <input matInput placeholder="Costo">
+                            <input type="number" matInput [disabled]="isDisabled" placeholder="Costo" name="costo" [(ngModel)]="capacitation.costo" #costo="ngModel" required min="0">
+                            <span matSuffix>Bs.</span>
+                            <mat-error *ngIf="costo.invalid && (costo.dirty || costo.touched)">Costo requerido</mat-error>
                         </mat-form-field>
                     </h2>
                 </div>
@@ -33,13 +38,15 @@
                     <div class="w-100 container">
                         <mat-form-field class="float-left w-45">
                             <mat-label>Fecha Inicio</mat-label>
-                            <input matInput [matDatepicker]="dateInscInit">
+                            <input matInput [disabled]="isDisabled" [matDatepicker]="dateInscInit" name="fecha_inicio_insc" [(ngModel)]="capacitation.fecha_inicio_insc" #fecha_inicio_insc="ngModel" required>
+                            <mat-error *ngIf="fecha_inicio_insc.invalid && (fecha_inicio_insc.dirty || fecha_inicio_insc.touched)">Es requerido</mat-error>
                             <mat-datepicker-toggle matSuffix [for]="dateInscInit"></mat-datepicker-toggle>
                             <mat-datepicker #dateInscInit></mat-datepicker>
                         </mat-form-field>
                         <mat-form-field class="float-right w-45">
                             <mat-label>Fecha Fin</mat-label>
-                            <input matInput [matDatepicker]="dateInscEnd">
+                            <input matInput [disabled]="isDisabled" [matDatepicker]="dateInscEnd" name="fecha_fin_insc" [(ngModel)]="capacitation.fecha_fin_insc" #fecha_fin_insc="ngModel" required>
+                            <mat-error *ngIf="fecha_fin_insc.invalid && (fecha_fin_insc.dirty || fecha_fin_insc.touched)">Es requerido</mat-error>
                             <mat-datepicker-toggle matSuffix [for]="dateInscEnd"></mat-datepicker-toggle>
                             <mat-datepicker #dateInscEnd></mat-datepicker>
                         </mat-form-field>
@@ -49,31 +56,60 @@
                 <h4 class="white-text mb-0">Fechas de la Capacitación:</h4>
                 <mat-form-field class="float-left w-45">
                     <mat-label>Fecha Inicio</mat-label>
-                    <input matInput [matDatepicker]="dateCapInit">
+                    <input matInput [disabled]="isDisabled" [matDatepicker]="dateCapInit" name="fecha_inicio" [(ngModel)]="capacitation.fecha_inicio" #fecha_inicio="ngModel" required>
+                    <mat-error *ngIf="fecha_inicio.invalid && (fecha_inicio.dirty || fecha_inicio.touched)">Es requerido</mat-error>
                     <mat-datepicker-toggle matSuffix [for]="dateCapInit"></mat-datepicker-toggle>
                     <mat-datepicker #dateCapInit></mat-datepicker>
                 </mat-form-field>
                 <mat-form-field class="float-right w-45">
                     <mat-label>Fecha Fin</mat-label>
-                    <input matInput [matDatepicker]="dateCapEnd">
+                    <input matInput [disabled]="isDisabled" [matDatepicker]="dateCapEnd" name="fecha_fin" [(ngModel)]="capacitation.fecha_fin" #fecha_fin="ngModel" required>
+                    <mat-error *ngIf="fecha_fin.invalid && (fecha_fin.dirty || fecha_fin.touched)">Es requerido</mat-error>
                     <mat-datepicker-toggle matSuffix [for]="dateCapEnd"></mat-datepicker-toggle>
                     <mat-datepicker #dateCapEnd></mat-datepicker>
                 </mat-form-field>
 
                 <mat-form-field class="float-left w-45">
                     <mat-label>Expositor /es</mat-label>
-                    <input matInput placeholder="Nombre de la capacitación">
+                    <input matInput [disabled]="isDisabled" placeholder="Nombre de la capacitación" name="expositor" [(ngModel)]="capacitation.expositor" #expositor="ngModel" required>
+                    <mat-error *ngIf="expositor.invalid && (expositor.dirty || expositor.touched)">Es requerido</mat-error>
                 </mat-form-field>
                 <mat-form-field class="float-right w-45">
                     <mat-label>Duración</mat-label>
-                    <input matInput placeholder="Nombre de la capacitación">
+                    <input matInput [disabled]="isDisabled" placeholder="Nombre de la capacitación" name="duracion" [(ngModel)]="capacitation.duracion" #duracion="ngModel" required>
+                    <mat-error *ngIf="duracion.invalid && (duracion.dirty || duracion.touched)">Es requerido</mat-error>
                 </mat-form-field>
             </div>
+
             <div class="container">
-                <mat-form-field class="w-100 mt-3">
-                    <mat-label>Descripción</mat-label>
-                    <textarea matInput></textarea>
-                </mat-form-field>
+                <div class="row">
+                    <div class="col-lg-6 my-auto">
+                        <mat-form-field class="float-left w-45">
+                            <mat-label>Lugar</mat-label>
+                            <input matInput [disabled]="isDisabled" placeholder="Nombre de la capacitación" name="lugar" [(ngModel)]="capacitation.lugar" #lugar="ngModel" required>
+                            <mat-error *ngIf="lugar.invalid && (lugar.dirty || lugar.touched)">Es requerido</mat-error>
+                        </mat-form-field>
+                        <mat-form-field class="float-right w-45">
+                            <mat-label>Hora</mat-label>
+                            <input matInput [disabled]="isDisabled" placeholder="Nombre de la capacitación" name="hora" [(ngModel)]="capacitation.hora" #hora="ngModel" required>
+                            <mat-error *ngIf="hora.invalid && (hora.dirty || hora.touched)">Es requerido</mat-error>
+                        </mat-form-field>
+                    </div>
+                    <div class="col-lg-6">
+                        <mat-form-field class="w-100 mt-3">
+                            <mat-label>Descripción</mat-label>
+                            <textarea matInput [disabled]="isDisabled" name="descripcion" [(ngModel)]="capacitation.descripcion" #descripcion="ngModel" required></textarea>
+                            <mat-error *ngIf="descripcion.invalid && (descripcion.dirty || descripcion.touched)">La descripción es requerida</mat-error>
+                        </mat-form-field>
+                    </div>
+                </div>
+            </div>
+            <div class="mt-2 mx-auto d-block" *ngIf="isErrorForm">
+                <h2><span class="badge badge-pill badge-danger">Un campo no ha sido llenado correctamente</span></h2>
+            </div>
+            <div class="mx-auto mt-2">
+                <button type="button" class="btn btn-purple white-text mx-2" (click)="alternateDisabled()">{{isDisabled ? 'activar edición': 'desactivar edición'}}</button>
+                <button *ngIf="!isDisabled" type="submit" class="btn btn-purple white-text mx-2" [disabled]="capacitationForm.invalid">Confirmar <i class="fas fa-check-circle"></i></button>
             </div>
         </form>
     </div>

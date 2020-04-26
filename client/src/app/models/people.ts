@@ -1,5 +1,8 @@
 export interface PeopleInterface{
-    ci_persona?: string;
+    id_persona?: number;
+    ci?: string;
     nombres?: string;
-    apellidos?: string;
+    paterno?: string;
+    materno?: string;
+    tipo?: string;
 }

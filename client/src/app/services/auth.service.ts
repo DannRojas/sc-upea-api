@@ -15,8 +15,15 @@ export class AuthService {
   private url_api:string = "http://localhost:3000/api/administradores"
 
   headers: HttpHeaders = new HttpHeaders({
-    "Content-type": "application/json"
+    "Content-type": "application/json",
+    Authorization: this.getToken()
   })
+
+  getAdministrators(): Observable<AdministratorInterface[]>{
+    const accessToken = localStorage.getItem('accessToken');
+    const url_api = `${this.url_api}?access_token=${accessToken}`;
+    return this.http.get<AdministratorInterface[]>(url_api, {headers : this.headers});
+  }
 
   createUser(administrator: AdministratorInterface): Observable<any>{
     let accessToken = localStorage.getItem('accessToken');
@@ -24,13 +31,23 @@ export class AuthService {
     return this.http.post<AdministratorInterface>(
       url_api,
       {
+        ci: administrator.ci,
         tipo: administrator.tipo,
+        nombre: administrator.nombre,
+        apellidos: administrator.apellidos,
+        celular: administrator.celular,
         username: administrator.username,
         email: administrator.email,
         password: administrator.password
       },
       { headers:this.headers }
     ).pipe(map(data => data));
+  }
+  
+  deleteUser(idUser: number){
+    const accessToken = localStorage.getItem('accessToken');
+    const url_api = `${this.url_api}/${idUser}?access_token=${accessToken}`;
+    return this.http.delete(url_api, {headers: this.headers});
   }
 
   loginUser(username: string, password: string): Observable<any>{
@@ -40,8 +57,7 @@ export class AuthService {
       {
         username: username,
         password: password
-      },
-      {headers: this.headers}).pipe(map(data => data));
+      },).pipe(map(data => data));
   }
 
   logoutUser():Observable<any> {

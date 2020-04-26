@@ -1,7 +1,7 @@
 <!-- <div class="background">
     <div class="mask"> -->
 
-        <div class="container ">
+        <div class="container pb-5 ">
             <div class="row mt">
                 <div class="col-lg-5 col-md-12 col-sm-12 my-auto items-align-center">
                     <div class="row">
@@ -31,15 +31,8 @@
                 <div class="col-lg-7 col-md-12 col-sm-12">
                     <div id="carouselExampleFade" class="carousel slide carousel-fade" data-ride="carousel">
                         <div class="carousel-inner">
-                            <div class="carousel-item active">
-                                <img src="../../../assets/cursos/BannerAngular.jpg"
-                                    class="d-block img-slider img-fluid">
-                            </div>
-                            <div class="carousel-item">
-                                <img src="../../../assets/cursos/crud.png" class="d-block img-slider img-fluid">
-                            </div>
-                            <div class="carousel-item">
-                                <img src="../../../assets/cursos/BannerAngular.jpg"
+                            <div class="carousel-item" [class.active]="isfirst" *ngFor="let capacitation of capacitations; first as isfirst">
+                                <img [src]="capacitation.pathImagen"
                                     class="d-block img-slider img-fluid">
                             </div>
                         </div>
@@ -62,23 +55,27 @@
                         <img [src]="capacitation?.pathImagen" class="card-img-top my-4 img-car">
                         <div class="card-body pt-0 white-text">
                             <div class="row">
-                                <div class="col-6">
+                                <div class="col-6 my-auto">
                                     <h2 class="font-weight-bold name-cap mb-1">{{capacitation.nombre}}</h2>
                                     <small>{{capacitation.descripcion}}</small>
                                     <h3 class="font-weight-bold">Precio {{capacitation.costo}} Bs.</h3>
                                 </div>
-                                <div class="col-6">
+                                <div class="col-6 my-auto">
+                                    <h4 class="font-weight-bold mb-0">Lugar:</h4>
+                                    <p class="mb-0">{{capacitation.lugar}}</p>
+                                    <h4 class="font-weight-bold mb-0 d-inline">Hora: </h4>
+                                    <p class="mb-0 d-inline"> {{capacitation.hora}}</p>
                                     <h4 class="font-weight-bold mb-0">Expositor/es:</h4>
                                     <p class="mb-0">{{capacitation.expositor}}</p>
-                                    <h4 class="font-weight-bold mb-0">Duracion:</h4>
-                                    <p class="mb-0">{{capacitation.duracion}}</p>
-                                    <p class="mb-0">Del {{capacitation.fecha_inicio.toLocaleDateString()}} al
-                                        {{capacitation.fecha_fin.toLocaleDateString()}}</p>
+                                    <h4 class="font-weight-bold mb-0 d-inline">Duracion: </h4>
+                                    <p class="mb-0 d-inline">{{capacitation.duracion}}</p>
+                                    <p class="mb-0">Del {{capacitation.fecha_inicio.toLocaleDateString()}} al {{capacitation.fecha_fin.toLocaleDateString()}}</p>
                                     <h4 class="font-weight-bold mb-0">Inscripciones:</h4>
                                     <p>Del {{capacitation.fecha_inicio_insc.toLocaleDateString()}} al
                                         {{capacitation.fecha_fin_insc.toLocaleDateString()}}</p>
-                                    <!-- <button class="btn btn-purple white-text">Inscribirme </button> -->
-                                    <button mat-raised-button color="primary">Inscribirme <mat-icon>how_to_reg</mat-icon></button>
+                                </div>
+                                <div class="mx-auto">
+                                    <button type="button" (click)="onEnroll(capacitation)" class="btn btn-purple text-white">Inscribirme <i class="fas fa-user-edit"></i></button>
                                 </div>
                             </div>
                         </div>
@@ -90,3 +87,5 @@
 
     <!-- </div>
 </div> -->
+
+<app-inscription-modal></app-inscription-modal>

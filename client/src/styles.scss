@@ -6,7 +6,7 @@ html, body { min-height: 100vh; }
 body { margin: 0; font-family: Roboto, "Helvetica Neue", sans-serif; }
 
 .mt{
-    padding-top: 7rem;
+    padding-top: 6.5rem;
 }
 
 .white-text{
@@ -25,7 +25,7 @@ body { margin: 0; font-family: Roboto, "Helvetica Neue", sans-serif; }
 }
 
 .btn-purple{
-    background-color: rgb(120, 6, 173);
+    background-color: rgba(159, 10, 228, 0.568);
 }
 
 mat-form-field{
@@ -43,9 +43,9 @@ mat-form-field{
     width: 45%;
 }
 
-.w-65{
-    width: 65%;
+.w-75{
+    width: 75%;
 }
-.w-30{
-    width: 30%;
+.w-20{
+    width: 20%;
 }

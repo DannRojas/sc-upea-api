@@ -1,11 +1,11 @@
-import { PeopleInterface } from './people';
-
 export interface AdministratorInterface{
-    id_administrador?: string;
+    id_administrador?: number;
+    ci?: string;
     tipo?: string;
+    nombre?: string;
+    apellidos?: string;
+    celular?: string;
     username?: string;
-    password?: string;
     email?: string;
-    ci_persona?: string;
-    persona?: PeopleInterface;
+    password?: string;
 }

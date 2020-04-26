@@ -1,15 +1,21 @@
-// .background{
-//     margin: 0;
-//     min-height: 100vh;
-//     background-image: url(../../../../assets/img/administratorFont.jpeg);
-//     background-repeat: no-repeat;
-//     background-size: cover;
-//     background-position: center;
-//     background-attachment: fixed;
-// }
+.title {
+    font-size: 2rem;
+    margin-bottom: 0;
+}
+
+.badge-title {
+    padding: 1%;
+    border: 2px solid rgb(49, 49, 49);
+    background-color: rgba(190, 0, 238, 0.603);
+}
+
+@media screen and (max-width: 700px) {
+    .title {
+        font-size: 1rem;
+    }
+}
 
 .xl{
-    // size: 50px;
     font-size: 2em;
 }
 

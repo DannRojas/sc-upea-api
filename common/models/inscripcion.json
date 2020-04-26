@@ -1,0 +1,27 @@
+{
+  "name": "inscripcion",
+  "plural": "inscripciones",
+  "base": "PersistedModel",
+  "idInjection": false,
+  "options": {
+    "validateUpsert": true
+  },
+  "properties": {
+    "id_inscripcion": {
+      "type": "number",
+      "id": true
+    },
+    "fecha_insc": {
+      "type": "date",
+      "required": true
+    },
+    "m_cancelado": {
+      "type": "number",
+      "required": true
+    }
+  },
+  "validations": [],
+  "relations": {},
+  "acls": [],
+  "methods": {}
+}

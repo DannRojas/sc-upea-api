@@ -1,9 +1,12 @@
+import { AdministratorInterface } from './../../../../models/administrator';
+import { AuthService } from 'src/app/services/auth.service';
+import { isNullOrUndefined } from 'util';
 import { ImageService } from 'src/app/services/image.service';
 import { CapacitationService } from 'src/app/services/capacitation.service';
-import { Component, OnInit } from '@angular/core';
+import { Component, OnInit, ViewChild } from '@angular/core';
 import { ActivatedRoute } from '@angular/router';
 import { CapacitationInterface } from 'src/app/models/capacitation';
-import { FormControl } from '@angular/forms';
+import { NgForm } from '@angular/forms';
 
 @Component({
   selector: 'app-course-detail',
@@ -12,24 +15,38 @@ import { FormControl } from '@angular/forms';
 })
 export class CourseDetailComponent implements OnInit {
 
-  constructor( private _activatedRoute: ActivatedRoute, private capacitationService: CapacitationService, private imageService: ImageService) { }
+  constructor( private _activatedRoute: ActivatedRoute, private capacitationService: CapacitationService, private imageService: ImageService, private authService: AuthService) { }
 
-  public capacitation: CapacitationInterface;
+  private admin: AdministratorInterface; 
+
+  @ViewChild('capacitationForm')
+  public capacitationForm: NgForm;
+
+  public capacitation: CapacitationInterface = Object.assign({});
   startDate = new Date(1990, 0, 1);
   public image: File = null;
+  public isUpdate:boolean = false;
+  public isDisabled:boolean = false;
+  public isErrorForm:boolean = false;
 
   ngOnInit(): void {
+    this.admin=this.authService.getCurrentUser();
     const idCapacitation = this._activatedRoute.snapshot.params['id'];
-    if(idCapacitation!=="0"){
+    if(idCapacitation !== "0"){
       this.getCapacitation(idCapacitation);
+      this.isUpdate = true;
+      this.isDisabled = true;
+    }else{
+      this.capacitation.pathImagen = "../../../../assets/img/404imagen.png";
+      this.isUpdate = false;
+      this.isDisabled = false
     }
   }
 
   getCapacitation(idCapacitation){
-    this.capacitationService.getCapacitationById(idCapacitation).subscribe(capacitation => {
+    this.capacitationService.getCapacitationById(idCapacitation).subscribe((capacitation:CapacitationInterface) => {
       this.imageService.getImageByName(capacitation.imagen).subscribe(image => {
         this.capacitation = capacitation;
-        console.log(this.capacitation);
         const blob = new Blob([image], { type: 'image/jpg' })
         const reader = new FileReader();
         reader.addEventListener('load', () => {
@@ -52,6 +69,48 @@ export class CourseDetailComponent implements OnInit {
     }catch(e) {
       this.capacitation.pathImagen = "../../../../assets/img/404imagen.png";
     }
+  }
+
+  onAddOrUpdate(){
+    if(this.isUpdate){
+      // console.log("is Update");
+      if(this.image !== null){
+        // console.log("con imagen");
+        this.imageService.deleteImage(this.capacitation.imagen).subscribe(deleteImage => {
+          this.capacitation.imagen = this.image.name;
+          this.imageService.saveImage(this.image).subscribe(saveImage => {
+            this.capacitationService.updateCapacitation(this.capacitation).subscribe(updateCapacitation => {
+              this.isErrorForm = false;
+              this.isDisabled = true;
+            })
+          })
+        })
+      }else{
+        // console.log("sin imagen");
+        this.capacitationService.updateCapacitation(this.capacitation).subscribe(updateCapacitation => {
+          this.isErrorForm = false;
+          this.isDisabled = true;
+        })
+      }
+    }else{
+      if(this.capacitationForm.valid && this.capacitation.pathImagen != "../../../../assets/img/404imagen.png" && !isNullOrUndefined(this.image)){
+        this.imageService.saveImage(this.image).subscribe(saveImage => {
+          this.capacitation.imagen = this.image.name;
+          this.capacitation.id_administrador = this.admin.id_administrador;
+          this.capacitationService.saveCapacitation(this.capacitation).subscribe(newCapacitation => {
+            this.isErrorForm = false;
+            this.isDisabled = true;
+          })
+        })
+      } else {
+        this.isErrorForm = true;
+      }
+    }
+  }
+
+  alternateDisabled(){
+    this.isDisabled = !this.isDisabled;
+    // this.assignValueToForm(this.capacitation);
   }
 
 }

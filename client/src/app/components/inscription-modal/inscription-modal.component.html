@@ -1,0 +1,28 @@
+<button #buttonOpenModal type="button" hidden class="btn btn-primary" data-toggle="modal"
+  data-target=".bd-example-modal-sm">Small modal</button>
+
+<div class="modal fade bd-example-modal-sm" tabindex="-1" role="dialog" aria-labelledby="mySmallModalLabel"
+  aria-hidden="true">
+  <div class="modal-dialog modal-sm" role="document">
+    <div class="modal-content bg-img">
+      <div class="bg-mask">
+        <div class="container-fluid text-center">
+            <button #buttonCloseModal type="button" class="close white-text ml-auto" data-dismiss="modal" aria-label="Close">
+              <span aria-hidden="true">&times;</span>
+            </button>
+          <h2 class="white-text font-weight-bold mt-2 title mb-0">Ingrese su CI:</h2>
+          <form class="form mb-2 mx-4" (ngSubmit)="onSubmit()" #ciForm="ngForm">
+            <mat-form-field class="d-block mb-2">
+              <mat-label>Ingrese su CI:</mat-label>
+              <input matInput placeholder="Ej: 9237815" name="ci" [(ngModel)]="ci" #ci_persona="ngModel" required minlength="5">
+              <mat-error *ngIf="ci_persona.invalid && (ci_persona.dirty || ci_persona.touched)">El CI es incorrecto</mat-error>
+            </mat-form-field>
+
+            <button type="submit" [disabled]="ciForm.invalid" class="btn btn-purple text-white mb-4">Enviar</button>
+          </form>
+
+        </div>
+      </div>
+    </div>
+  </div>
+</div>

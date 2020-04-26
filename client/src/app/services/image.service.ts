@@ -23,8 +23,9 @@ export class ImageService {
     const token = this.authService.getToken();
     const formData = new FormData();
     formData.append(file.name, file);
-    const url_api = `${this.url_api}/product-images/upload?access-token=${token}`;
-    return this.http.post(url_api, formData, { headers: this.headers });
+    const url_api = `${this.url_api}/images/upload?access-token=${token}`;
+    console.log(url_api);
+    return this.http.post(url_api, formData).pipe(map(data => data));
   }
 
   getImageByName(imagen: string) {
@@ -49,7 +50,7 @@ export class ImageService {
 
   deleteImage(name: string) {
     const token = this.authService.getToken();
-    const url_api = `${this.url_api}/product-images/files/${name}?access-token=${token}`;
+    const url_api = `${this.url_api}/images/files/${name}?access-token=${token}`;
     return this.http.delete(url_api, { headers: this.headers }).pipe(map(data => data));
   }
 }

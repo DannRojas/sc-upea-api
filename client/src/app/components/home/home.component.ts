@@ -1,9 +1,10 @@
 import { ImageService } from './../../services/image.service';
 import { CapacitationService } from './../../services/capacitation.service';
 import { CapacitationInterface } from './../../models/capacitation';
-import { Component, OnInit, OnDestroy } from '@angular/core';
+import { Component, OnInit, OnDestroy, ViewChild } from '@angular/core';
 import { Subject } from 'rxjs';
 import { takeUntil } from 'rxjs/operators';
+import { InscriptionModalComponent } from '../inscription-modal/inscription-modal.component';
 
 @Component({
   selector: 'app-home',
@@ -16,6 +17,9 @@ export class HomeComponent implements OnInit, OnDestroy {
   public capacitations: CapacitationInterface[];
 
   constructor(private capacitationService: CapacitationService, private imageService: ImageService) { }
+
+  @ViewChild(InscriptionModalComponent)
+  inscriptionModalComponent: InscriptionModalComponent;
 
   ngOnInit(): void {
     this.getListCapacitations();
@@ -38,6 +42,10 @@ export class HomeComponent implements OnInit, OnDestroy {
   ngOnDestroy(): void {
     this.unsubscribe$.next();
     this.unsubscribe$.complete();
+  }
+
+  onEnroll(capacitation: CapacitationInterface){
+    this.inscriptionModalComponent.openModal(capacitation);
   }
 
 }

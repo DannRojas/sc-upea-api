@@ -1,0 +1,17 @@
+<button #buttonOpenModal type="button" hidden class="btn btn-primary" data-toggle="modal" data-target=".bd-example-modal-sm">Small modal</button>
+
+<div class="modal fade bd-example-modal-sm" tabindex="-1" role="dialog" aria-labelledby="mySmallModalLabel" aria-hidden="true">
+  <div class="modal-dialog modal-sm" role="document">
+    <div class="modal-content bg-gray container-fluid">
+        <button #buttonCloseModal type="button" class="close white-text ml-auto my-2" data-dismiss="modal" aria-label="Close">
+            <span aria-hidden="true">&times;</span>
+        </button>
+        <div class="text-center white-text">
+            <span><i class="fas fa-exclamation-circle xl mb-2"></i></span>
+            <h3 class="mb-2">{{message}}</h3>
+
+            <button class="btn btn-purple white-text mb-3" (click)="confirm()">Confirmar</button>
+        </div>
+    </div>
+  </div>
+</div>

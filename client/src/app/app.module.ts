@@ -15,8 +15,10 @@ import { LoginComponent } from './components/profile/login/login.component';
 import { NavigationComponent } from './components/navigation/navigation.component';
 import { CoursesComponent } from './components/admin/courses/courses.component';
 import { AdministratorsComponent } from './components/admin/administrators/administrators.component';
-import { ModalCoursesComponent } from './components/admin/courses/modal-courses/modal-courses.component';
 import { CourseDetailComponent } from './components/admin/courses/course-detail/course-detail.component';
+import { ModalAdminComponent } from './components/admin/administrators/modal-admin/modal-admin.component';
+import { InscriptionModalComponent } from './components/inscription-modal/inscription-modal.component';
+import { ConfirmModalComponent } from './components/admin/confirm-modal/confirm-modal.component';
 
 @NgModule({
   declarations: [
@@ -27,8 +29,10 @@ import { CourseDetailComponent } from './components/admin/courses/course-detail/
     NavigationComponent,
     CoursesComponent,
     AdministratorsComponent,
-    ModalCoursesComponent,
-    CourseDetailComponent
+    CourseDetailComponent,
+    ModalAdminComponent,
+    InscriptionModalComponent,
+    ConfirmModalComponent
   ],
   imports: [
     BrowserModule,

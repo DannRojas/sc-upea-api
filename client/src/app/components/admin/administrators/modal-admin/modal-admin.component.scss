@@ -1,0 +1,23 @@
+.bg-img {
+    margin: 0;
+    background-image: url(./../../../../../assets/img/administrador.jpg);
+    background-repeat: no-repeat;
+    background-size: cover;
+    background-position: center;
+}
+
+.bg-mask{
+    margin: 0;
+    background: rgba(0, 0, 0, 0.411);
+}
+
+.title {
+    font-size: 2em;
+    margin-bottom: 0;
+    display: block !important;
+    text-align: center !important;
+    margin-top: 10%;
+    margin-left: 2em;
+    color: rgb(255, 255, 255);
+    position: relative;
+}

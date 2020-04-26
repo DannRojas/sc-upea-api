@@ -24,29 +24,32 @@ export class PeopleService {
     return this.http.get<PeopleInterface[]>(url_api);
   }
 
-  getPeopleByCi(ci_persona: string): Observable<PeopleInterface> {
-    const url_api = `${this.url_api}/${ci_persona}`;
+  getPeopleByAttribute(attribute:string, argument:string): Observable<PeopleInterface[]>{
+    const url_api = `${this.url_api}?filter[where][${attribute}]=${argument}`;
+    return this.http.get<PeopleInterface[]>(url_api);
+  }
+
+  getPeopleById(id_persona: number): Observable<PeopleInterface> {
+    const url_api = `${this.url_api}/${id_persona}`;
     return this.http.get<PeopleInterface>(url_api);
   }
 
   savePeople(people: PeopleInterface): Observable<PeopleInterface> {
     //TODO: get token
-    const token = this.authService.getToken();
     const url_api = this.url_api;
-    return this.http.post<PeopleInterface>(url_api, people, { headers: this.headers });
+    return this.http.post<PeopleInterface>(url_api, people);
   }
 
   updatePeople(people: PeopleInterface): Observable<PeopleInterface> {
     //TODO: get token
-    const token = this.authService.getToken();
-    const url_api = `${this.url_api}/${people.ci_persona}/?access_token=${token}`;
-    return this.http.put<PeopleInterface>(url_api, people, { headers: this.headers }).pipe(map(data => data))
+    const url_api = `${this.url_api}/${people.id_persona}`;
+    return this.http.put<PeopleInterface>(url_api, people).pipe(map(data => data));
   }
 
-  deletePeople(ci_persona: string) {
+  deletePeople(id_persona: string) {
     //TODO: get token
     const token = this.authService.getToken();
-    const url_api = `${this.url_api}/${ci_persona}?access_token=${token}`;
+    const url_api = `${this.url_api}/${id_persona}?access_token=${token}`;
     return this.http.delete(url_api, { headers: this.headers }).pipe(map(data => data));
   }
 }

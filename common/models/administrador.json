@@ -11,8 +11,24 @@
       "type": "number",
       "id": true
     },
+    "ci": {
+      "type": "number",
+      "required": true
+    },
     "tipo": {
       "type": "string",
+      "required": true
+    },
+    "nombres": {
+      "type": "string",
+      "required": true
+    },
+    "apellidos": {
+      "type": "string",
+      "required": true
+    },
+    "celular": {
+      "type": "number",
       "required": true
     }
   },

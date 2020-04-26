@@ -1,43 +1,44 @@
 {
-  "name": "persona",
+  "name": "estudiante",
+  "plural": "estudiantes",
   "base": "PersistedModel",
   "idInjection": false,
   "options": {
     "validateUpsert": true
   },
   "properties": {
-    "id_persona": {
-      "type": "number",
+    "id_estudiante": {
+      "type": "string",
       "id": true
     },
     "ci": {
+      "type": "number",
+      "required": true
+    },
+    "expedido": {
       "type": "string",
       "required": true
     },
-    "nombres": {
+    "nombre": {
       "type": "string",
       "required": true
     },
-    "apellidos": {
+    "paterno": {
+      "type": "string",
+      "required": true,
+      "default": "materno"
+    },
+    "materno": {
       "type": "string",
       "required": true
     },
-    "tipo": {
+    "estado": {
       "type": "string",
       "required": true
     }
   },
   "validations": [],
-  "relations": {
-    "inscripciones": {
-      "type": "hasMany",
-      "model": "inscripcion",
-      "foreignKey": "",
-      "options": {
-        "nestRemoting": true
-      }
-    }
-  },
+  "relations": {},
   "acls": [],
   "methods": {}
 }

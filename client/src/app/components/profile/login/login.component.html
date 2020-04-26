@@ -14,16 +14,16 @@
                 <div class="modal-body">
                     <form [formGroup]="loginForm" (ngSubmit)="onLogin()" class="example-form text-center">
                         <h2>
-                            <mat-form-field appearance="legacy" class="col-8">
+                            <mat-form-field appearance="legacy" class="col-8" color="accent">
                                 <mat-label>Nombre de usuario</mat-label>
-                                <input type="text" matInput formControlName="userName" required>
+                                <input type="text" matInput formControlName="userName">
                                 <mat-error *ngIf="userName.invalid && (userName.dirty || userName.touched)">El nombre de usuario es incorrecto</mat-error>
                             </mat-form-field>
                         </h2>
                         <h2>
-                            <mat-form-field appearance="legacy" class="col-8">
+                            <mat-form-field appearance="legacy" class="col-8" color="accent">
                                 <mat-label>Contraseña</mat-label>
-                                <input matInput [type]="hide ? 'password' : 'text'" formControlName="userPassword" required>
+                                <input matInput [type]="hide ? 'password' : 'text'" formControlName="userPassword">
                                 <button mat-icon-button matSuffix (click)="hide = !hide"
                                     [attr.aria-label]="'Hide password'" [attr.aria-pressed]="hide">
                                     <mat-icon>{{hide ? 'visibility_off' : 'visibility'}}</mat-icon>

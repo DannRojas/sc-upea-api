@@ -13,13 +13,16 @@
         <a class="nav-link" routerLink="/"><i class="fas fa-home"></i> Inicio</a>
       </li>
       <li *ngIf="isLogin" class="nav-item active">
-        <a class="nav-link" routerLink="/courses"><i class="fas fa-graduation-cap"></i> Cursos</a>
+        <a class="nav-link" routerLink="/courses"><i class="fas fa-graduation-cap"></i> Capacitaciones</a>
       </li>
+      <li *ngIf="isLogin" class="nav-item active">
+        <a class="nav-link" routerLink="/administrator"><i class="fas fa-user-cog"></i> Administrador</a>
+    </li>
     </ul>
     <ul class="navbar-nav ml-auto mr-5">
       <li *ngIf="isLogin" class="nav-item dropdown active mr-5">
         <a class="nav-link dropdown-toggle" id="navbarDropdown" role="button" data-toggle="dropdown" data-display="static" aria-haspopup="true" aria-expanded="false">
-          <i class="fas fa-user-tie"></i> {{administrator.username}}</a>
+          <i class="fas fa-user-tie"></i> {{administrator.nombre}}</a>
         <div class="dropdown-menu" aria-labelledby="navbarDropdown">
           <a class="dropdown-item text-center" (click)="onLogout()">Cerrar Sesión</a>
         </div>

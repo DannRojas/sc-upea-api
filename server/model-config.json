@@ -14,7 +14,8 @@
     ]
   },
   "User": {
-    "dataSource": "mysql"
+    "dataSource": "mysql",
+    "public": false
   },
   "AccessToken": {
     "dataSource": "mysql",
@@ -49,6 +50,14 @@
   },
   "container": {
     "dataSource": "files_local",
+    "public": true
+  },
+  "inscripcion": {
+    "dataSource": "mysql",
+    "public": true
+  },
+  "estudiante": {
+    "dataSource": "mysql",
     "public": true
   }
 }

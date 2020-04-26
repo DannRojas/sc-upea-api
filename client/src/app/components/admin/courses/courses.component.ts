@@ -1,4 +1,5 @@
-import { Component, OnInit, OnDestroy } from '@angular/core';
+import { ConfirmModalComponent } from './../confirm-modal/confirm-modal.component';
+import { Component, OnInit, OnDestroy, ViewChild } from '@angular/core';
 import { CapacitationService } from 'src/app/services/capacitation.service';
 import { ImageService } from 'src/app/services/image.service';
 import { takeUntil } from 'rxjs/operators';
@@ -17,6 +18,11 @@ export class CoursesComponent implements OnInit, OnDestroy {
 
   constructor(private capacitationService: CapacitationService, private imageService: ImageService) { }
 
+  @ViewChild(ConfirmModalComponent)
+  confirmModal: ConfirmModalComponent;
+
+  private selectedCapacitation: CapacitationInterface;
+
   ngOnInit(): void {
     this.getListCapacitations();
   }
@@ -30,10 +36,24 @@ export class CoursesComponent implements OnInit, OnDestroy {
           this.capacitations[i].fecha_fin = new Date(this.capacitations[i].fecha_fin);
           this.capacitations[i].fecha_inicio_insc = new Date(this.capacitations[i].fecha_inicio_insc);
           this.capacitations[i].fecha_fin_insc = new Date(this.capacitations[i].fecha_fin_insc);
-          // console.log(this.capacitations);
         }
       })
     });
+  }
+
+  onPreDelete(capacitation: CapacitationInterface){
+    this.selectedCapacitation = Object.assign({}, capacitation);
+    this.confirmModal.onPreConfirm("¿Está seguro de que desea eliminar "+capacitation.nombre+"?");
+  }
+
+  onDeleteCapacitation(confirmAction: boolean){
+    if(confirmAction){
+      this.imageService.deleteImage(this.selectedCapacitation.imagen).subscribe(deleteImage => {
+        this.capacitationService.deleteCapacitation(this.selectedCapacitation.id_capacitacion).subscribe(deleteCapacitation => this.getListCapacitations())
+      })
+    }else{
+      this.selectedCapacitation = Object.assign({});
+    }
   }
 
   ngOnDestroy(): void {
