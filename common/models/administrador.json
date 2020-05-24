@@ -12,7 +12,7 @@
       "id": true
     },
     "ci": {
-      "type": "number",
+      "type": "string",
       "required": true
     },
     "tipo": {
@@ -28,7 +28,7 @@
       "required": true
     },
     "celular": {
-      "type": "number",
+      "type": "string",
       "required": true
     }
   },

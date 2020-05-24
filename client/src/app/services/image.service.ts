@@ -24,7 +24,6 @@ export class ImageService {
     const formData = new FormData();
     formData.append(file.name, file);
     const url_api = `${this.url_api}/images/upload?access-token=${token}`;
-    console.log(url_api);
     return this.http.post(url_api, formData).pipe(map(data => data));
   }
 

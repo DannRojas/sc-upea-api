@@ -1,12 +1,15 @@
-import { AdministratorInterface } from './../../../../models/administrator';
-import { AuthService } from 'src/app/services/auth.service';
-import { isNullOrUndefined } from 'util';
-import { ImageService } from 'src/app/services/image.service';
-import { CapacitationService } from 'src/app/services/capacitation.service';
 import { Component, OnInit, ViewChild } from '@angular/core';
-import { ActivatedRoute } from '@angular/router';
+
+import { AdministratorInterface } from './../../../../models/administrator';
 import { CapacitationInterface } from 'src/app/models/capacitation';
+import { isNullOrUndefined } from 'util';
+import { ActivatedRoute } from '@angular/router';
 import { NgForm } from '@angular/forms';
+
+import { CapacitationService } from 'src/app/services/capacitation.service';
+import { ToastrService } from 'ngx-toastr';
+import { AuthService } from 'src/app/services/auth.service';
+import { ImageService } from 'src/app/services/image.service';
 
 @Component({
   selector: 'app-course-detail',
@@ -15,7 +18,7 @@ import { NgForm } from '@angular/forms';
 })
 export class CourseDetailComponent implements OnInit {
 
-  constructor( private _activatedRoute: ActivatedRoute, private capacitationService: CapacitationService, private imageService: ImageService, private authService: AuthService) { }
+  constructor( private _activatedRoute: ActivatedRoute, private capacitationService: CapacitationService, private imageService: ImageService, private authService: AuthService, private toastrService: ToastrService) { }
 
   private admin: AdministratorInterface; 
 
@@ -30,6 +33,7 @@ export class CourseDetailComponent implements OnInit {
   public isErrorForm:boolean = false;
 
   ngOnInit(): void {
+    this.authService.loading$.emit(true);
     this.admin=this.authService.getCurrentUser();
     const idCapacitation = this._activatedRoute.snapshot.params['id'];
     if(idCapacitation !== "0"){
@@ -39,7 +43,8 @@ export class CourseDetailComponent implements OnInit {
     }else{
       this.capacitation.pathImagen = "../../../../assets/img/404imagen.png";
       this.isUpdate = false;
-      this.isDisabled = false
+      this.isDisabled = false;
+      this.authService.loading$.emit(false);
     }
   }
 
@@ -54,6 +59,7 @@ export class CourseDetailComponent implements OnInit {
         }, false)
         if (blob)
           reader.readAsDataURL(blob);
+        this.authService.loading$.emit(false);
       })
     })
   }
@@ -82,6 +88,7 @@ export class CourseDetailComponent implements OnInit {
             this.capacitationService.updateCapacitation(this.capacitation).subscribe(updateCapacitation => {
               this.isErrorForm = false;
               this.isDisabled = true;
+              this.toastrService.info("La capacitación "+updateCapacitation.nombre+" ha sido modificada", "Capacitación modificada")
             })
           })
         })
@@ -90,6 +97,7 @@ export class CourseDetailComponent implements OnInit {
         this.capacitationService.updateCapacitation(this.capacitation).subscribe(updateCapacitation => {
           this.isErrorForm = false;
           this.isDisabled = true;
+          this.toastrService.info("La capacitación "+updateCapacitation.nombre+" ha sido modificada", "Capacitación modificada");
         })
       }
     }else{
@@ -100,17 +108,13 @@ export class CourseDetailComponent implements OnInit {
           this.capacitationService.saveCapacitation(this.capacitation).subscribe(newCapacitation => {
             this.isErrorForm = false;
             this.isDisabled = true;
+            this.toastrService.success("La capacitación "+newCapacitation.nombre+" se ha introducido satisfactoriamente.", "Capacitación agregada")
           })
         })
       } else {
         this.isErrorForm = true;
       }
     }
-  }
-
-  alternateDisabled(){
-    this.isDisabled = !this.isDisabled;
-    // this.assignValueToForm(this.capacitation);
   }
 
 }

@@ -29,11 +29,11 @@ export class CapacitationService {
     return this.http.get<CapacitationInterface>(url);
   }
 
-  saveCapacitation(capacitation: CapacitationInterface){
+  saveCapacitation(capacitation: CapacitationInterface): Observable<CapacitationInterface>{
     // console.log("new capacitation");
     this.onPreAddOrUpdate(capacitation);
     const token = this.authService.getToken();
-    return this.http.post(this.url_api, this.capacitation);
+    return this.http.post<CapacitationInterface>(this.url_api, this.capacitation);
   }
 
   updateCapacitation(capacitation: CapacitationInterface): Observable<CapacitationInterface> {

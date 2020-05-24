@@ -2,50 +2,64 @@
 
 // @import '@angular/material/prebuilt-themes/deeppurple-amber.css';
 
-html, body { min-height: 100vh; }
-body { margin: 0; font-family: Roboto, "Helvetica Neue", sans-serif; }
+html,
+body {
+    min-height: 100vh;
+}
 
-.mt{
+body {
+    margin     : 0;
+    font-family: Roboto, "Helvetica Neue", sans-serif;
+}
+
+.mt {
     padding-top: 6.5rem;
 }
 
-.white-text{
+.white-text {
     color: white;
 }
 
-.light-gray-text{
+.light-gray-text {
     color: rgb(232, 226, 235)
 }
 
-.bg-dark-light{
+.bg-dark-light {
     background-color: rgba(0, 0, 0, 0.411);
 }
-.bg-dark-strong{
+
+.bg-dark-strong {
     background-color: rgba(0, 0, 0, 0.616);
 }
 
-.btn-purple{
+.btn-purple {
     background-color: rgba(159, 10, 228, 0.568);
 }
 
-mat-form-field{
+mat-form-field {
     color: white !important;
 }
 
 .footer {
-    position   : fixed;
-    bottom     : 0px;
-    width      : 100%;
-    height     : 5%;
+    position: fixed;
+    bottom  : 0px;
+    width   : 100%;
+    height  : 5%;
 }
 
-.w-45{
+.w-45 {
     width: 45%;
 }
 
-.w-75{
+.w-75 {
     width: 75%;
 }
-.w-20{
+
+.w-20 {
     width: 20%;
+}
+
+.cdk-global-overlay-wrapper,
+.cdk-overlay-container {
+    z-index: 99999 !important;
 }

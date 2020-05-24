@@ -1,3 +1,4 @@
+import { AuthService } from 'src/app/services/auth.service';
 import { ConfirmModalComponent } from './../confirm-modal/confirm-modal.component';
 import { Component, OnInit, OnDestroy, ViewChild } from '@angular/core';
 import { CapacitationService } from 'src/app/services/capacitation.service';
@@ -16,7 +17,7 @@ export class CoursesComponent implements OnInit, OnDestroy {
   private unsubscribe$ = new Subject<void>();
   public capacitations: CapacitationInterface[];
 
-  constructor(private capacitationService: CapacitationService, private imageService: ImageService) { }
+  constructor(private capacitationService: CapacitationService, private imageService: ImageService, private authService: AuthService) { }
 
   @ViewChild(ConfirmModalComponent)
   confirmModal: ConfirmModalComponent;
@@ -24,6 +25,7 @@ export class CoursesComponent implements OnInit, OnDestroy {
   private selectedCapacitation: CapacitationInterface;
 
   ngOnInit(): void {
+    this.authService.loading$.emit(true);
     this.getListCapacitations();
   }
 
@@ -37,6 +39,7 @@ export class CoursesComponent implements OnInit, OnDestroy {
           this.capacitations[i].fecha_inicio_insc = new Date(this.capacitations[i].fecha_inicio_insc);
           this.capacitations[i].fecha_fin_insc = new Date(this.capacitations[i].fecha_fin_insc);
         }
+        this.authService.loading$.emit(false);
       })
     });
   }
@@ -49,7 +52,7 @@ export class CoursesComponent implements OnInit, OnDestroy {
   onDeleteCapacitation(confirmAction: boolean){
     if(confirmAction){
       this.imageService.deleteImage(this.selectedCapacitation.imagen).subscribe(deleteImage => {
-        this.capacitationService.deleteCapacitation(this.selectedCapacitation.id_capacitacion).subscribe(deleteCapacitation => this.getListCapacitations())
+        this.capacitationService.deleteCapacitation(this.selectedCapacitation.id_capacitacion).subscribe(deleteCapacitation => this.ngOnInit())
       })
     }else{
       this.selectedCapacitation = Object.assign({});

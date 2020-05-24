@@ -15,8 +15,7 @@ export class ConfirmModalComponent implements OnInit {
   @ViewChild('buttonCloseModal')
   buttonCloseModal: ElementRef;
 
-  @Output()
-  confirmAction: EventEmitter<boolean> = new EventEmitter<boolean>();
+  @Output() confirmAction: EventEmitter<boolean> = new EventEmitter<boolean>();
 
   public message:string;
 

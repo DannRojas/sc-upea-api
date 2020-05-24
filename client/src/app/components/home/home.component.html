@@ -1,91 +1,87 @@
-<!-- <div class="background">
-    <div class="mask"> -->
-
-        <div class="container pb-5 ">
-            <div class="row mt">
-                <div class="col-lg-5 col-md-12 col-sm-12 my-auto items-align-center">
-                    <div class="row">
-                        <div class="col-5">
-                            <div id="carouselExampleSlidesOnly" class="carousel slide" data-ride="carousel">
-                                <div class="carousel-inner">
-                                    <div class="carousel-item active">
-                                        <h2 class="title text-primary mb-0 font-weight-bold">UPEA</h2>
-                                    </div>
-                                    <div class="carousel-item">
-                                        <h2 class="title text-primary mb-0 font-weight-bold">Cursos</h2>
-                                    </div>
-                                    <div class="carousel-item">
-                                        <h2 class="title text-primary mb-0 font-weight-bold">SIE</h2>
-                                    </div>
-                                </div>
-                            </div>
-                        </div>
-                        <div class="col-7">
-                            <h2 class="title white-text">Sistema de</h2>
-
-                        </div>
-                    </div>
-                    <h2 class="title white-text">información y</h2>
-                    <h2 class="title white-text">estadísticas</h2>
-                </div>
-                <div class="col-lg-7 col-md-12 col-sm-12">
-                    <div id="carouselExampleFade" class="carousel slide carousel-fade" data-ride="carousel">
+<div class="container pb-5 ">
+    <div class="row mt">
+        <div class="col-lg-5 col-md-12 col-sm-12 my-auto items-align-center">
+            <div class="row">
+                <div class="col-5">
+                    <div id="carouselExampleSlidesOnly" class="carousel slide" data-ride="carousel">
                         <div class="carousel-inner">
-                            <div class="carousel-item" [class.active]="isfirst" *ngFor="let capacitation of capacitations; first as isfirst">
-                                <img [src]="capacitation.pathImagen"
-                                    class="d-block img-slider img-fluid">
+                            <div class="carousel-item active">
+                                <h2 class="title text-primary mb-0 font-weight-bold">UPEA</h2>
                             </div>
-                        </div>
-                        <a class="carousel-control-prev" href="#carouselExampleFade" role="button" data-slide="prev">
-                            <span class="carousel-control-prev-icon" aria-hidden="true"></span>
-                            <span class="sr-only">Previous</span>
-                        </a>
-                        <a class="carousel-control-next" href="#carouselExampleFade" role="button" data-slide="next">
-                            <span class="carousel-control-next-icon" aria-hidden="true"></span>
-                            <span class="sr-only">Next</span>
-                        </a>
-                    </div>
-                </div>
-
-            </div>
-
-            <div class="row pt-5">
-                <div class="col-lg-6 col-md-12 col-sm-12 my-2" *ngFor="let capacitation of capacitations">
-                    <div class="card bg-dark-strong" style="width: 100%;">
-                        <img [src]="capacitation?.pathImagen" class="card-img-top my-4 img-car">
-                        <div class="card-body pt-0 white-text">
-                            <div class="row">
-                                <div class="col-6 my-auto">
-                                    <h2 class="font-weight-bold name-cap mb-1">{{capacitation.nombre}}</h2>
-                                    <small>{{capacitation.descripcion}}</small>
-                                    <h3 class="font-weight-bold">Precio {{capacitation.costo}} Bs.</h3>
-                                </div>
-                                <div class="col-6 my-auto">
-                                    <h4 class="font-weight-bold mb-0">Lugar:</h4>
-                                    <p class="mb-0">{{capacitation.lugar}}</p>
-                                    <h4 class="font-weight-bold mb-0 d-inline">Hora: </h4>
-                                    <p class="mb-0 d-inline"> {{capacitation.hora}}</p>
-                                    <h4 class="font-weight-bold mb-0">Expositor/es:</h4>
-                                    <p class="mb-0">{{capacitation.expositor}}</p>
-                                    <h4 class="font-weight-bold mb-0 d-inline">Duracion: </h4>
-                                    <p class="mb-0 d-inline">{{capacitation.duracion}}</p>
-                                    <p class="mb-0">Del {{capacitation.fecha_inicio.toLocaleDateString()}} al {{capacitation.fecha_fin.toLocaleDateString()}}</p>
-                                    <h4 class="font-weight-bold mb-0">Inscripciones:</h4>
-                                    <p>Del {{capacitation.fecha_inicio_insc.toLocaleDateString()}} al
-                                        {{capacitation.fecha_fin_insc.toLocaleDateString()}}</p>
-                                </div>
-                                <div class="mx-auto">
-                                    <button type="button" (click)="onEnroll(capacitation)" class="btn btn-purple text-white">Inscribirme <i class="fas fa-user-edit"></i></button>
-                                </div>
+                            <div class="carousel-item">
+                                <h2 class="title text-primary mb-0 font-weight-bold">Cursos</h2>
+                            </div>
+                            <div class="carousel-item">
+                                <h2 class="title text-primary mb-0 font-weight-bold">SIE</h2>
                             </div>
                         </div>
                     </div>
                 </div>
-            </div>
+                <div class="col-7">
+                    <h2 class="title white-text">Sistema de</h2>
 
+                </div>
+            </div>
+            <h2 class="title white-text">información y</h2>
+            <h2 class="title white-text">estadísticas</h2>
+        </div>
+        <div class="col-lg-7 col-md-12 col-sm-12">
+            <div id="carouselExampleFade" class="carousel slide carousel-fade" data-ride="carousel">
+                <div class="carousel-inner">
+                    <div class="carousel-item" [class.active]="isfirst"
+                        *ngFor="let capacitation of capacitations; first as isfirst">
+                        <img [src]="capacitation.pathImagen" class="d-block img-slider img-fluid">
+                    </div>
+                </div>
+                <a class="carousel-control-prev" href="#carouselExampleFade" role="button" data-slide="prev">
+                    <span class="carousel-control-prev-icon" aria-hidden="true"></span>
+                    <span class="sr-only">Previous</span>
+                </a>
+                <a class="carousel-control-next" href="#carouselExampleFade" role="button" data-slide="next">
+                    <span class="carousel-control-next-icon" aria-hidden="true"></span>
+                    <span class="sr-only">Next</span>
+                </a>
+            </div>
         </div>
 
-    <!-- </div>
-</div> -->
+    </div>
+
+    <div class="row pt-5">
+        <div class="col-lg-6 col-md-12 col-sm-12 my-2" *ngFor="let capacitation of capacitations">
+            <div class="card bg-dark-strong" style="width: 100%;">
+                <img [src]="capacitation?.pathImagen" class="card-img-top my-4 img-car">
+                <div class="card-body pt-0 white-text">
+                    <div class="row">
+                        <div class="col-6 my-auto">
+                            <h2 class="font-weight-bold name-cap mb-1">{{capacitation.nombre}}</h2>
+                            <small>{{capacitation.descripcion}}</small>
+                            <h3 class="font-weight-bold">Precio {{capacitation.costo}} Bs.</h3>
+                        </div>
+                        <div class="col-6 my-auto">
+                            <h4 class="font-weight-bold mb-0">Lugar:</h4>
+                            <p class="mb-0">{{capacitation.lugar}}</p>
+                            <h4 class="font-weight-bold mb-0 d-inline">Hora: </h4>
+                            <p class="mb-0 d-inline"> {{capacitation.hora}}</p>
+                            <h4 class="font-weight-bold mb-0">Expositor/es:</h4>
+                            <p class="mb-0">{{capacitation.expositor}}</p>
+                            <h4 class="font-weight-bold mb-0 d-inline">Duracion: </h4>
+                            <p class="mb-0 d-inline">{{capacitation.duracion}}</p>
+                            <p class="mb-0">Del {{capacitation.fecha_inicio.toLocaleDateString()}} al
+                                {{capacitation.fecha_fin.toLocaleDateString()}}</p>
+                            <h4 class="font-weight-bold mb-0">Inscripciones:</h4>
+                            <p>Del {{capacitation.fecha_inicio_insc.toLocaleDateString()}} al
+                                {{capacitation.fecha_fin_insc.toLocaleDateString()}}</p>
+                        </div>
+                        <div class="mx-auto">
+                            <button type="button" (click)="onEnroll(capacitation)"
+                                class="btn btn-purple text-white">Inscribirme <i class="fas fa-user-edit"></i></button>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+</div>
 
 <app-inscription-modal></app-inscription-modal>

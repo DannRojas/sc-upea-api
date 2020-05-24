@@ -4,6 +4,7 @@ import { MatInputModule } from '@angular/material/input';
 import { MatDatepickerModule } from '@angular/material/datepicker';
 // import { MatNativeDateModule } from '@angular/material/core';
 import { MatMomentDateModule } from '@angular/material-moment-adapter';
+import { MatSelectModule } from '@angular/material/select';
 
 import { NgModule } from '@angular/core';
 // import { CommonModule } from '@angular/common';
@@ -15,14 +16,16 @@ import { NgModule } from '@angular/core';
         MatIconModule,
         MatInputModule,
         MatDatepickerModule,
-        MatMomentDateModule
+        MatMomentDateModule,
+        MatSelectModule
     ],
     exports: [
         MatButtonModule,
         MatIconModule,
         MatInputModule,
         MatDatepickerModule,
-        MatMomentDateModule
+        MatMomentDateModule,
+        MatSelectModule
     ]
 })
 export class MaterialModule{}

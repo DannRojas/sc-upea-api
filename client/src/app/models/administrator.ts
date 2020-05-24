@@ -2,7 +2,7 @@ export interface AdministratorInterface{
     id_administrador?: number;
     ci?: string;
     tipo?: string;
-    nombre?: string;
+    nombres?: string;
     apellidos?: string;
     celular?: string;
     username?: string;

@@ -1,3 +1,4 @@
+import { AuthService } from 'src/app/services/auth.service';
 import { ImageService } from './../../services/image.service';
 import { CapacitationService } from './../../services/capacitation.service';
 import { CapacitationInterface } from './../../models/capacitation';
@@ -18,20 +19,22 @@ export class HomeComponent implements OnInit, OnDestroy {
   private unsubscribe$ = new Subject<void>();
   public capacitations: CapacitationInterface[];
 
-  constructor(private capacitationService: CapacitationService, private imageService: ImageService, private toastrService: ToastrService) { }
+  constructor(private capacitationService: CapacitationService, private imageService: ImageService, private toastrService: ToastrService, private authService: AuthService) { }
 
   @ViewChild(InscriptionModalComponent)
   inscriptionModalComponent: InscriptionModalComponent;
 
   ngOnInit(): void {
+    this.authService.loading$.emit(true);
     this.getListCapacitations();
-    // this.toastrService.info("Este es un mensaje","Titulo",{closeButton: true, timeOut: 1000, });
+    // this.toastrService.info("Este es un mensaje","Titulo",{closeButton: true, timeOut: 5000, });
   }
 
   getListCapacitations(): void {
     this.capacitationService.getAllCapacitations().subscribe(data => {
       this.imageService.getAllImages(data).pipe(takeUntil(this.unsubscribe$)).subscribe(capacitations => {
         this.capacitations = capacitations;
+        this.authService.loading$.emit(false);
         for (let i in this.capacitations) {
           this.capacitations[i].fecha_inicio = new Date(this.capacitations[i].fecha_inicio);
           this.capacitations[i].fecha_fin = new Date(this.capacitations[i].fecha_fin);

@@ -7,7 +7,7 @@
 
     <div class="container-fluid card bg-dark-strong mt-4 pb-3">
         <form class="row mt-2 mt-3" (ngSubmit)="onAddOrUpdate()" #capacitationForm="ngForm">
-            <div class="col-lg-6 p-0 px-2 view">
+            <div class="col-lg-6 p-0 px-2 view mb-2">
                 <input type="file" (change)="onFileSelected($event)" accept='image/*' class="d-none" #fileInput>
                 <img [src]="capacitation?.pathImagen" class="img-fluid">
                 <div class="mask">
@@ -108,7 +108,7 @@
                 <h2><span class="badge badge-pill badge-danger">Un campo no ha sido llenado correctamente</span></h2>
             </div>
             <div class="mx-auto mt-2">
-                <button type="button" class="btn btn-purple white-text mx-2" (click)="alternateDisabled()">{{isDisabled ? 'activar edición': 'desactivar edición'}}</button>
+                <button type="button" class="btn btn-purple white-text mx-2" (click)="isDisabled = !isDisabled">{{isDisabled ? 'activar edición': 'desactivar edición'}}</button>
                 <button *ngIf="!isDisabled" type="submit" class="btn btn-purple white-text mx-2" [disabled]="capacitationForm.invalid">Confirmar <i class="fas fa-check-circle"></i></button>
             </div>
         </form>

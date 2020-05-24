@@ -1,6 +1,6 @@
 import { AuthService } from './../../../services/auth.service';
-import { Component, OnInit } from '@angular/core';
-import { FormGroup, Validators, FormBuilder } from '@angular/forms';
+import { Component, OnInit, ViewChild, ElementRef } from '@angular/core';
+import { FormGroup, Validators, FormBuilder, NgForm } from '@angular/forms';
 
 @Component({
   selector: 'app-login',
@@ -12,6 +12,12 @@ export class LoginComponent implements OnInit {
   public hide:boolean = true;
   public isError:boolean = false;
   public loginForm: FormGroup;
+
+  @ViewChild('btnClose')
+  btnClose: ElementRef;
+
+  @ViewChild('formDirective')
+  formDirective: NgForm;
 
   constructor(private authService: AuthService, private formBuilder: FormBuilder) {  }
 
@@ -50,9 +56,11 @@ export class LoginComponent implements OnInit {
 
   onReset() {
     this.isError = false;
-    this.loginForm.patchValue({
-      userName: '',
-      userPassword: ''
-    })
+    this.formDirective.resetForm();
+    this.loginForm.reset();
+    // this.loginForm.patchValue({
+    //   userName: '',
+    //   userPassword: ''
+    // });
   }
 }

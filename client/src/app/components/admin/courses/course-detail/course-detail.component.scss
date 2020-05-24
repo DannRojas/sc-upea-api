@@ -1,10 +1,10 @@
 .view {
     overflow: hidden;
-    // height: 20.5em;
     width: auto;
 
     .mask {
-        display: none !important;
+        display: none;
+        // display: none !important;
     }
 }
 
@@ -16,9 +16,9 @@
     }
 
     .mask {
-        display         : flex !important;
-        justify-content : center !important;
-        align-items     : center !important;
+        display         : flex;
+        justify-content : center;
+        align-items     : center;
         transition      : all .5s ease-in-out;
         content         : "";
         width           : 100%;
@@ -38,13 +38,13 @@ img {
 }
 
 .title {
-    font-size: 2rem;
+    font-size    : 2rem;
     margin-bottom: 0;
 }
 
 .badge-title {
-    padding: 1%;
-    border: 1px solid rgb(49, 49, 49);
+    padding         : 1%;
+    border          : 1px solid rgb(49, 49, 49);
     background-color: rgba(190, 0, 238, 0.603);
 }
 

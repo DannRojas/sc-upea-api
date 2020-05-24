@@ -14,25 +14,28 @@
                         <th scope="col" class="align-middle">Usuario</th>
                         <th scope="col" class="align-middle">Email</th>
                         <th scope="col" class="align-middle">Celular</th>
-                        <th scope="col" class="align-middle"><span data-toggle="tooltip" data-placement="top" (click)="onAdd()" title="Nuevo Administrador"><i class="fas fa-plus-circle xl"></i></span></th>
+                        <th scope="col" class="align-middle"><span data-toggle="tooltip" data-placement="top" (click)="addOrUpdateAdministrator()" title="Nuevo Administrador"><i class="fas fa-plus-circle xl"></i></span></th>
 
                     </tr>
                 </thead>
                 <tbody>
                     <tr *ngFor="let administrator of administrators">
                         <td class="align-middle">{{administrator.ci}}</td>
-                        <td class="align-middle">{{administrator.nombre}}</td>
+                        <td class="align-middle">{{administrator.nombres}}</td>
                         <td class="align-middle">{{administrator.apellidos}}</td>
                         <td class="align-middle">{{administrator.tipo}}</td>
                         <td class="align-middle">{{administrator.username}}</td>
                         <td class="align-middle">{{administrator.email}}</td>
                         <td class="align-middle">{{administrator.celular}}</td>
-                        <td class="align-middle"><span *ngIf="administrator.tipo !== 'super-administrador'" (click)="onPreDelete(administrator)" data-toggle="tooltip" data-placement="top" title="Eliminar"><i class="fas fa-trash-alt"></i></span></td>
+                        <td *ngIf="administrator.id_administrador !== currentAdministrator.id_administrador ; else CurrentAdministrator" class="align-middle"><span class="mr-3" (click)="addOrUpdateAdministrator(administrator)" data-toggle="tooltip" data-placement="top" title="Modificar"><i class="fas fa-edit"></i></span> <span *ngIf="administrator.tipo !== 'super-administrador'" (click)="onPreDelete(administrator)" data-toggle="tooltip" data-placement="top" title="Eliminar"><i class="fas fa-trash-alt"></i></span></td>
                     </tr>
                 </tbody>
             </table>
         </div>
     </div>
 </div>
-<app-modal-admin (confirmAdd)="getListAdministrator()"></app-modal-admin>
+
+<ng-template #CurrentAdministrator><td>--</td></ng-template>
+
+<app-modal-admin (confirmAdd)="posModalAdministrator($event)"></app-modal-admin>
 <app-confirm-modal (confirmAction)="onDeleteAdministrator($event)"></app-confirm-modal>

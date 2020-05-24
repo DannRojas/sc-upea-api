@@ -20,9 +20,9 @@
     </li>
     </ul>
     <ul class="navbar-nav ml-auto mr-5">
-      <li *ngIf="isLogin" class="nav-item dropdown active mr-5">
+      <li *ngIf="isLogin" class="nav-item active dropdown mr-5">
         <a class="nav-link dropdown-toggle" id="navbarDropdown" role="button" data-toggle="dropdown" data-display="static" aria-haspopup="true" aria-expanded="false">
-          <i class="fas fa-user-tie"></i> {{administrator.nombre}}</a>
+          <i class="fas fa-user-tie"></i> {{administrator.nombres}}</a>
         <div class="dropdown-menu" aria-labelledby="navbarDropdown">
           <a class="dropdown-item text-center" (click)="onLogout()">Cerrar Sesión</a>
         </div>
@@ -33,5 +33,9 @@
     </ul>
   </div>
 </nav>
+
+<div *ngIf="loading" class="load">
+  <div class="loading"></div>
+</div>
 
 <app-login></app-login>
