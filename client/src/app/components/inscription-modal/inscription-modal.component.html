@@ -90,6 +90,6 @@
 
 <ng-template #downPDF>
   <div class="mx-auto">
-    <button type="button" class="btn btn-purple text-white">Descargar boleta de inscripción <i class="fas fa-download"></i></button>
+    <button type="button" (click)="generatePDF()" class="btn btn-purple text-white">Descargar boleta de inscripción <i class="fas fa-download"></i></button>
   </div>
 </ng-template>

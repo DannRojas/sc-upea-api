@@ -1,3 +1,4 @@
+import { GeneratorPDF } from './../../services/generatorPDF.service';
 import { InscriptionService } from './../../services/inscription.service';
 import { Component, OnInit, ViewChild, ElementRef } from '@angular/core';
 import { NgForm } from '@angular/forms';
@@ -14,7 +15,7 @@ import { InscriptionInterface } from 'src/app/models/inscription';
 })
 export class InscriptionModalComponent implements OnInit {
 
-  constructor(private peopleService: PeopleService, private inscriptionService: InscriptionService, private toastrService: ToastrService) { }
+  constructor(private peopleService: PeopleService, private inscriptionService: InscriptionService, private toastrService: ToastrService, private generatorPDF: GeneratorPDF) { }
 
   public people: PeopleInterface = {};
   public ci:string = "";
@@ -119,7 +120,7 @@ export class InscriptionModalComponent implements OnInit {
     this.inscription.fecha_insc = new Date();
     this.inscription.m_cancelado = 0;
     this.inscription.personaId = this.people.id_persona;
-    this.inscription.id_incripcion = null;
+    this.inscription.id_inscripcion = null;
     this.inscriptionService.saveInscription(this.inscription).subscribe( inscription => {
       this.toastrService.info("Si la capacitación tiene costo debe regularizar este a la brevedad posible","Inscripción exitosa", {closeButton: true, timeOut: 8000});
       this.isEnrolled();
@@ -130,6 +131,11 @@ export class InscriptionModalComponent implements OnInit {
     this.peopleForm.resetForm();
     this.people = Object.assign({});
     this.btnCloseMPeople.nativeElement.click();
+  }
+
+  generatePDF(){
+    this.generatorPDF.generateTicket(this.capacitation, this.people);
+    
   }
 
 }

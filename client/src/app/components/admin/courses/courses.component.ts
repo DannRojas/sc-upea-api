@@ -34,7 +34,7 @@ export class CoursesComponent implements OnInit, OnDestroy {
   getListCapacitations(): void {
     this.currentAdministrator = this.authService.getCurrentUser();
     if(this.currentAdministrator.tipo === "propietario"){
-      console.log("propietario");
+      // console.log("propietario");
       this.capacitationService.getCapacitationsByAttribute('id_administrador', this.currentAdministrator.id_administrador).subscribe(data => {
         this.imageService.getAllImages(data).pipe(takeUntil(this.unsubscribe$)).subscribe(capacitations => {
           this.capacitations = capacitations;
@@ -48,7 +48,7 @@ export class CoursesComponent implements OnInit, OnDestroy {
         })
       });
     }else{
-      console.log("administrador");
+      // console.log("administrador");
       this.capacitationService.getAllCapacitations().subscribe(data => {
         this.imageService.getAllImages(data).pipe(takeUntil(this.unsubscribe$)).subscribe(capacitations => {
           this.capacitations = capacitations;

@@ -22,6 +22,12 @@ import { InscriptionModalComponent } from './components/inscription-modal/inscri
 import { ConfirmModalComponent } from './components/admin/confirm-modal/confirm-modal.component';
 import { ModalInscriptionComponent } from './components/admin/courses/modal-inscription/modal-inscription.component';
 
+import { PdfMakeWrapper } from 'pdfmake-wrapper';
+import pdfFonts from "pdfmake/build/vfs_fonts"; // fonts provided for pdfmake
+ 
+// Set the fonts to use
+PdfMakeWrapper.setFonts(pdfFonts);
+
 @NgModule({
   declarations: [
     AppComponent,
