@@ -20,6 +20,7 @@ import { CourseDetailComponent } from './components/admin/courses/course-detail/
 import { ModalAdminComponent } from './components/admin/administrators/modal-admin/modal-admin.component';
 import { InscriptionModalComponent } from './components/inscription-modal/inscription-modal.component';
 import { ConfirmModalComponent } from './components/admin/confirm-modal/confirm-modal.component';
+import { ModalInscriptionComponent } from './components/admin/courses/modal-inscription/modal-inscription.component';
 
 @NgModule({
   declarations: [
@@ -33,7 +34,8 @@ import { ConfirmModalComponent } from './components/admin/confirm-modal/confirm-
     CourseDetailComponent,
     ModalAdminComponent,
     InscriptionModalComponent,
-    ConfirmModalComponent
+    ConfirmModalComponent,
+    ModalInscriptionComponent
   ],
   imports: [
     BrowserModule,

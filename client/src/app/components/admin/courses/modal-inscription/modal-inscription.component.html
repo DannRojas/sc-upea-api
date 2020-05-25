@@ -1,0 +1,63 @@
+<button data-toggle="modal" hidden data-target=".peopleModal" #btnOpenMInscription></button>
+
+<div class="modal fade peopleModal" data-backdrop="static" tabindex="-1" role="dialog"
+  aria-labelledby="myLargeModalLabel" aria-hidden="true">
+  <div class="modal-dialog " role="document">
+    <div class="modal-content bg-img-p">
+      <div class="bg-mask">
+        <button type="button" (click)="closeModal()" class="close white-text m-3">
+          <span aria-hidden="true">&times;</span>
+        </button>
+        <button hidden data-dismiss="modal" aria-label="Close" #btnCloseMInscription></button>
+        <h2 class="font-weight-bold title-p">Estudiante:</h2>
+        <div class="container mt-4">
+          <div class="row">
+            <form class="col-12 text-center" (ngSubmit)="updatePeople()" #inscriptionForm="ngForm"
+              [style.fontSize.px]="18">
+              <mat-form-field class="w-75">
+                <mat-label>Nombres:</mat-label>
+                <input matInput [disabled]="!activatePeople" placeholder="Nombres" name="nombres" [(ngModel)]="inscPeople.nombres" #nombres="ngModel" required>
+                <mat-error *ngIf="nombres.invalid">El nombre es requerido</mat-error>
+              </mat-form-field>
+              <mat-form-field class="w-75">
+                <mat-label>Apellidos:</mat-label>
+                <input matInput [disabled]="!activatePeople" placeholder="Apellidos" name="apellidos" [(ngModel)]="inscPeople.apellidos" #apellidos="ngModel" required>
+                <mat-error *ngIf="apellidos.invalid">El apellido es requerido</mat-error>
+              </mat-form-field>
+              <div class="col-11 mx-auto">
+                <mat-form-field class="col-6">
+                    <mat-label>CI:</mat-label>
+                    <input matInput [disabled]="!activatePeople" placeholder="Ci" name="ci" [(ngModel)]="inscPeople.ci" #ci="ngModel" required>
+                    <mat-error *ngIf="ci.invalid">El CI es requerido</mat-error>
+                </mat-form-field>
+                <mat-form-field class="col-6">
+                    <mat-label>Ocupación</mat-label>
+                    <mat-select [disabled]="!activatePeople" [(ngModel)]="inscPeople.tipo" name="tipo" #tipo="ngModel" required>
+                      <mat-option *ngFor="let type of types" [value]="type">{{type}}</mat-option>
+                    </mat-select>
+                    <mat-error *ngIf="tipo.invalid">El tipo es requerido</mat-error>
+                </mat-form-field>
+              </div>
+              <div class="d-block mt-2 mb-4">
+                <button mat-raised-button color="primary" type="button" (click)="activatePeople = !activatePeople" class="mr-1">{{activatePeople ? 'Desactivar edición' : 'Activar edición'}}</button>
+                <button mat-raised-button color="primary" type="submit" *ngIf="activatePeople" [disabled]="inscriptionForm.invalid">Confirmar Datos</button>
+              </div>
+            </form>
+          </div>
+          <div class="row mb-4">
+            <form class="col-12 text-center" (ngSubmit)="updateInscription()" #inscForm="ngForm" [style.fontSize.px]="18">
+                <div class="col-11">
+                    <mat-form-field class="col-5">
+                        <mat-label>Monto cancelado:</mat-label>
+                        <input matInput type="number" placeholder="m_cancelado" name="m_cancelado" [(ngModel)]="inscPeople.m_cancelado" #m_cancelado="ngModel" required>
+                        <mat-error *ngIf="m_cancelado.invalid">El monto cancelado es requerido</mat-error>
+                    </mat-form-field>
+                    <button mat-raised-button color="primary" type="submit" [disabled]="inscForm.invalid">Confirmar Monto</button>
+                </div>
+            </form>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>

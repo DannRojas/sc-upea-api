@@ -24,6 +24,11 @@ export class CapacitationService {
     return this.http.get<CapacitationInterface[]>(this.url_api);
   }
 
+  getCapacitationsByAttribute(attribute:string, argument:number): Observable<CapacitationInterface[]>{
+    const url_api = `${this.url_api}?filter[where][${attribute}]=${argument}`;
+    return this.http.get<CapacitationInterface[]>(url_api);
+  }
+
   getCapacitationById(idCapacitation: number){
     let url: string = `${this.url_api}/${idCapacitation}`;
     return this.http.get<CapacitationInterface>(url);

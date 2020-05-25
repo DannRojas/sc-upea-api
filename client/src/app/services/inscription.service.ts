@@ -35,18 +35,16 @@ export class InscriptionService {
   }
 
   saveInscription(inscription: InscriptionInterface): Observable<InscriptionInterface> {
-    //TODO: get token
     const url_api = this.url_api;
     return this.http.post<InscriptionInterface>(url_api, inscription);
   }
 
   updateInscription(inscription: InscriptionInterface): Observable<InscriptionInterface>{
-    const url_api = `${this.url_api}/${inscription.id_incripcion}`;
+    const url_api = `${this.url_api}/${inscription.id_inscripcion}`;
     return this.http.put<InscriptionInterface>(url_api, inscription).pipe(map(data => data));
   }
 
-  deletePeople(id_inscripcion: string) {
-    //TODO: get token
+  deleteInscription(id_inscripcion: number) {
     const url_api = `${this.url_api}/${id_inscripcion}`;
     return this.http.delete(url_api).pipe(map(data => data));
   }

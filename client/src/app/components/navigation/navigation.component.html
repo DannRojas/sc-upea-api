@@ -15,7 +15,7 @@
       <li *ngIf="isLogin" class="nav-item active">
         <a class="nav-link" routerLink="/courses"><i class="fas fa-graduation-cap"></i> Capacitaciones</a>
       </li>
-      <li *ngIf="isLogin" class="nav-item active">
+      <li *ngIf="administrator?.tipo === 'super-administrador' && isLogin" class="nav-item active">
         <a class="nav-link" routerLink="/administrator"><i class="fas fa-user-cog"></i> Administrador</a>
     </li>
     </ul>

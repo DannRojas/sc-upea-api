@@ -1,3 +1,6 @@
+import { ModalInscriptionComponent } from './../modal-inscription/modal-inscription.component';
+import { PeopleService } from './../../../../services/people.service';
+import { InscriptionService } from './../../../../services/inscription.service';
 import { Component, OnInit, ViewChild } from '@angular/core';
 
 import { AdministratorInterface } from './../../../../models/administrator';
@@ -10,6 +13,9 @@ import { CapacitationService } from 'src/app/services/capacitation.service';
 import { ToastrService } from 'ngx-toastr';
 import { AuthService } from 'src/app/services/auth.service';
 import { ImageService } from 'src/app/services/image.service';
+import { PeopleInterface } from 'src/app/models/people';
+import { InscriptionPeopleInterface, InscriptionInterface } from 'src/app/models/inscription';
+import { ConfirmModalComponent } from '../../confirm-modal/confirm-modal.component';
 
 @Component({
   selector: 'app-course-detail',
@@ -18,9 +24,12 @@ import { ImageService } from 'src/app/services/image.service';
 })
 export class CourseDetailComponent implements OnInit {
 
-  constructor( private _activatedRoute: ActivatedRoute, private capacitationService: CapacitationService, private imageService: ImageService, private authService: AuthService, private toastrService: ToastrService) { }
+  constructor( private _activatedRoute: ActivatedRoute, private capacitationService: CapacitationService, private imageService: ImageService, private authService: AuthService, private toastrService: ToastrService, private inscriptionService: InscriptionService, private peopleService: PeopleService) { }
 
-  private admin: AdministratorInterface; 
+  private admin: AdministratorInterface;
+  
+  @ViewChild(ModalInscriptionComponent)
+  modalInscriptionComponent: ModalInscriptionComponent;
 
   @ViewChild('capacitationForm')
   public capacitationForm: NgForm;
@@ -52,6 +61,7 @@ export class CourseDetailComponent implements OnInit {
     this.capacitationService.getCapacitationById(idCapacitation).subscribe((capacitation:CapacitationInterface) => {
       this.imageService.getImageByName(capacitation.imagen).subscribe(image => {
         this.capacitation = capacitation;
+        this.getInscriptions();
         const blob = new Blob([image], { type: 'image/jpg' })
         const reader = new FileReader();
         reader.addEventListener('load', () => {
@@ -79,9 +89,7 @@ export class CourseDetailComponent implements OnInit {
 
   onAddOrUpdate(){
     if(this.isUpdate){
-      // console.log("is Update");
       if(this.image !== null){
-        // console.log("con imagen");
         this.imageService.deleteImage(this.capacitation.imagen).subscribe(deleteImage => {
           this.capacitation.imagen = this.image.name;
           this.imageService.saveImage(this.image).subscribe(saveImage => {
@@ -93,7 +101,6 @@ export class CourseDetailComponent implements OnInit {
           })
         })
       }else{
-        // console.log("sin imagen");
         this.capacitationService.updateCapacitation(this.capacitation).subscribe(updateCapacitation => {
           this.isErrorForm = false;
           this.isDisabled = true;
@@ -114,6 +121,57 @@ export class CourseDetailComponent implements OnInit {
       } else {
         this.isErrorForm = true;
       }
+    }
+  }
+
+  // ***********************************************
+
+  public inscPeoples: InscriptionPeopleInterface[] = [];
+  public inscPeople: InscriptionPeopleInterface = {};
+
+  public inscription: InscriptionInterface = {};
+  
+  @ViewChild(ConfirmModalComponent)
+  confirmModal: ConfirmModalComponent;
+
+  getInscriptions(){
+    this.inscriptionService.getInscriptionsByAttribute('capacitacionId', this.capacitation.id_capacitacion).subscribe( (inscriptions : InscriptionInterface[]) => {
+      if(inscriptions.length>0){
+        this.inscPeoples = inscriptions;
+        this.peopleService.getAllPeoples().subscribe( (peoples: PeopleInterface[]) => {
+          peoples.map(people => {
+            for(let i in this.inscPeoples){
+              if(this.inscPeoples[i].personaId === people.id_persona){
+                this.inscPeoples[i].ci = people.ci;
+                this.inscPeoples[i].nombres = people.nombres;
+                this.inscPeoples[i].apellidos = people.apellidos;
+                this.inscPeoples[i].tipo = people.tipo;
+              }
+            }
+          })
+          console.log(this.inscPeoples);
+        })
+      }else{
+        this.inscPeoples = [];
+      }
+    })
+  }
+
+  onPreDeleteInscription( inscriptionPeople: InscriptionPeopleInterface){
+    this.inscription.id_inscripcion = inscriptionPeople.id_inscripcion;
+    // this.inscription.capacitacionId = inscriptionPeople.capacitacionId;
+    // this.inscription.personaId = inscriptionPeople.personaId;
+    // this.inscription.fecha_insc = inscriptionPeople.fecha_insc;
+    // this.inscription.m_cancelado = inscriptionPeople.m_cancelado;
+    this.confirmModal.onPreConfirm("¿Está seguro de que desea eliminar la inscripción de "+inscriptionPeople.nombres+"?");
+  }
+
+  onDeleteInscription(event){
+    if(event){
+      this.inscriptionService.deleteInscription(this.inscription.id_inscripcion).subscribe(data => {
+        this.getInscriptions();
+        this.toastrService.info("Se ha eliminado la inscripción con éxito", "Eliminado con éxito");
+      })
     }
   }
 

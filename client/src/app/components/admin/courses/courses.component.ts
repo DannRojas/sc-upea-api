@@ -1,3 +1,4 @@
+import { AdministratorInterface } from './../../../models/administrator';
 import { AuthService } from 'src/app/services/auth.service';
 import { ConfirmModalComponent } from './../confirm-modal/confirm-modal.component';
 import { Component, OnInit, OnDestroy, ViewChild } from '@angular/core';
@@ -23,6 +24,7 @@ export class CoursesComponent implements OnInit, OnDestroy {
   confirmModal: ConfirmModalComponent;
 
   private selectedCapacitation: CapacitationInterface;
+  private currentAdministrator: AdministratorInterface = {};
 
   ngOnInit(): void {
     this.authService.loading$.emit(true);
@@ -30,18 +32,36 @@ export class CoursesComponent implements OnInit, OnDestroy {
   }
 
   getListCapacitations(): void {
-    this.capacitationService.getAllCapacitations().subscribe(data => {
-      this.imageService.getAllImages(data).pipe(takeUntil(this.unsubscribe$)).subscribe(capacitations => {
-        this.capacitations = capacitations;
-        for (let i in this.capacitations) {
-          this.capacitations[i].fecha_inicio = new Date(this.capacitations[i].fecha_inicio);
-          this.capacitations[i].fecha_fin = new Date(this.capacitations[i].fecha_fin);
-          this.capacitations[i].fecha_inicio_insc = new Date(this.capacitations[i].fecha_inicio_insc);
-          this.capacitations[i].fecha_fin_insc = new Date(this.capacitations[i].fecha_fin_insc);
-        }
-        this.authService.loading$.emit(false);
-      })
-    });
+    this.currentAdministrator = this.authService.getCurrentUser();
+    if(this.currentAdministrator.tipo === "propietario"){
+      console.log("propietario");
+      this.capacitationService.getCapacitationsByAttribute('id_administrador', this.currentAdministrator.id_administrador).subscribe(data => {
+        this.imageService.getAllImages(data).pipe(takeUntil(this.unsubscribe$)).subscribe(capacitations => {
+          this.capacitations = capacitations;
+          for (let i in this.capacitations) {
+            this.capacitations[i].fecha_inicio = new Date(this.capacitations[i].fecha_inicio);
+            this.capacitations[i].fecha_fin = new Date(this.capacitations[i].fecha_fin);
+            this.capacitations[i].fecha_inicio_insc = new Date(this.capacitations[i].fecha_inicio_insc);
+            this.capacitations[i].fecha_fin_insc = new Date(this.capacitations[i].fecha_fin_insc);
+          }
+          this.authService.loading$.emit(false);
+        })
+      });
+    }else{
+      console.log("administrador");
+      this.capacitationService.getAllCapacitations().subscribe(data => {
+        this.imageService.getAllImages(data).pipe(takeUntil(this.unsubscribe$)).subscribe(capacitations => {
+          this.capacitations = capacitations;
+          for (let i in this.capacitations) {
+            this.capacitations[i].fecha_inicio = new Date(this.capacitations[i].fecha_inicio);
+            this.capacitations[i].fecha_fin = new Date(this.capacitations[i].fecha_fin);
+            this.capacitations[i].fecha_inicio_insc = new Date(this.capacitations[i].fecha_inicio_insc);
+            this.capacitations[i].fecha_fin_insc = new Date(this.capacitations[i].fecha_fin_insc);
+          }
+          this.authService.loading$.emit(false);
+        })
+      });
+    }
   }
 
   onPreDelete(capacitation: CapacitationInterface){
