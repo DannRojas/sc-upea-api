@@ -15,10 +15,10 @@
           <form class="form mb-2 mx-4" (ngSubmit)="onSubmit()" #ciForm="ngForm">
             <mat-form-field class="d-block mb-2">
               <mat-label>Ingrese su CI:</mat-label>
-              <input matInput placeholder="Ej: 9237815" name="ci" [(ngModel)]="ci" #ci_persona="ngModel" required
-                minlength="5">
-              <mat-error *ngIf="ci_persona.invalid && (ci_persona.dirty || ci_persona.touched)">El CI es incorrecto
-              </mat-error>
+              <input matInput placeholder="Ej: 9237815" type="text" name="ci" [(ngModel)]="ci" #ci_persona="ngModel"
+                required minlength="5">
+              <mat-error *ngIf="ci_persona.hasError('required')">El CI es requerido</mat-error>
+              <mat-error *ngIf="ci_persona.hasError('minlength')">El CI debe tener almenos 5 caracteres</mat-error>
             </mat-form-field>
 
             <button type="submit" [disabled]="ciForm.invalid" class="btn btn-purple text-white mb-4">Enviar</button>
@@ -29,3 +29,67 @@
     </div>
   </div>
 </div>
+
+<!-- ************************* -->
+
+<button data-toggle="modal" hidden data-target=".peopleModal" #btnOpenMPeople></button>
+
+<div class="modal fade peopleModal" data-backdrop="static" tabindex="-1" role="dialog"
+  aria-labelledby="myLargeModalLabel" aria-hidden="true">
+  <div class="modal-dialog " role="document">
+    <div class="modal-content bg-img-p">
+      <div class="bg-mask">
+        <button type="button" (click)="closeModal()" class="close white-text m-3">
+          <span aria-hidden="true">&times;</span>
+        </button>
+        <button hidden data-dismiss="modal" aria-label="Close" #btnCloseMPeople></button>
+        <h2 class="font-weight-bold title-p">Registro:</h2>
+        <div class="container mt-4">
+          <div class="row">
+            <form class="col-12 text-center" (ngSubmit)="onRegisterPeople()" #peopleForm="ngForm"
+              [style.fontSize.px]="18">
+              <mat-form-field class="w-75">
+                <mat-label>Nombres:</mat-label>
+                <input matInput [disabled]="disablePeopleForm" placeholder="Nombres" name="nombres" [(ngModel)]="people.nombres" #nombres="ngModel" required>
+                <mat-error *ngIf="nombres.invalid">El nombre es requerido</mat-error>
+              </mat-form-field>
+              <mat-form-field class="w-75">
+                <mat-label>Apellidos:</mat-label>
+                <input matInput [disabled]="disablePeopleForm" placeholder="Apellidos" name="apellidos" [(ngModel)]="people.apellidos" #apellidos="ngModel" required>
+                <mat-error *ngIf="apellidos.invalid">El apellido es requerido</mat-error>
+              </mat-form-field>
+              <mat-form-field class="w-75">
+                <mat-label>Ocupación</mat-label>
+                <mat-select [disabled]="disablePeopleForm" [(ngModel)]="people.tipo" name="tipo" #tipo="ngModel" required>
+                  <mat-option *ngFor="let type of types" [value]="type">{{type}}</mat-option>
+                </mat-select>
+                <mat-error *ngIf="tipo.invalid">El tipo es requerido</mat-error>
+              </mat-form-field>
+              <div *ngIf="!disablePeopleForm" class="d-block mt-2 mb-3">
+                <button mat-raised-button color="primary" [disabled]="peopleForm.invalid">Confirmar Datos</button>
+              </div>
+            </form>
+          </div>
+          <!-- ************************************************************* -->
+          <div class="row text-center mb-4" *ngIf="disablePeopleForm">
+            <div class="col-12">
+              <h3 class="white-text mb-1">{{capacitation.nombre}}</h3>
+            </div>
+            <div class="col-12">
+              <h3><span class="badge badge-pill badge-info">{{isSigned ? 'Inscrito' : 'Pendiente'}}</span></h3>
+            </div>
+            <div class="mx-auto" *ngIf="!isSigned ; else downPDF">
+              <button type="button" (click)="onEnrolled()" class="btn btn-purple text-white">Inscribirme <i class="fas fa-user-edit"></i></button>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+
+<ng-template #downPDF>
+  <div class="mx-auto">
+    <button type="button" class="btn btn-purple text-white">Descargar boleta de inscripción <i class="fas fa-download"></i></button>
+  </div>
+</ng-template>

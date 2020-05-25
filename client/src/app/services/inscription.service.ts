@@ -1,5 +1,5 @@
 import { Injectable } from '@angular/core';
-import { HttpHeaders, HttpClient } from '@angular/common/http/http';
+import { HttpHeaders, HttpClient } from '@angular/common/http';
 import { AuthService } from './auth.service';
 import { Observable } from 'rxjs';
 import { InscriptionInterface } from '../models/inscription';
@@ -24,7 +24,7 @@ export class InscriptionService {
     return this.http.get<InscriptionInterface[]>(url_api);
   }
 
-  getInscriptionsByAttribute(attribute:string, argument:string): Observable<InscriptionInterface[]>{
+  getInscriptionsByAttribute(attribute:string, argument:number): Observable<InscriptionInterface[]>{
     const url_api = `${this.url_api}?filter[where][${attribute}]=${argument}`;
     return this.http.get<InscriptionInterface[]>(url_api);
   }
@@ -32,6 +32,12 @@ export class InscriptionService {
   getInscriptionById(id_inscripcion: number): Observable<InscriptionInterface> {
     const url_api = `${this.url_api}/${id_inscripcion}`;
     return this.http.get<InscriptionInterface>(url_api);
+  }
+
+  saveInscription(inscription: InscriptionInterface): Observable<InscriptionInterface> {
+    //TODO: get token
+    const url_api = this.url_api;
+    return this.http.post<InscriptionInterface>(url_api, inscription);
   }
 
   updateInscription(inscription: InscriptionInterface): Observable<InscriptionInterface>{

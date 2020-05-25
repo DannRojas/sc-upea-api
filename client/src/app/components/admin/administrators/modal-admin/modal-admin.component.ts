@@ -42,7 +42,7 @@ export class ModalAdminComponent implements OnInit {
   onAddOrUpdateAdministrator(){
     if(this.administratorForm.valid){
       if(this.isUpdate){
-        console.log("Is Update");
+        // console.log("Is Update");
         this.administratorService.updateUser(this.administrator).subscribe(data => {
           this.confirmAdd.emit(true);
           this.closeModal();
@@ -50,12 +50,12 @@ export class ModalAdminComponent implements OnInit {
           console.log(error);
         })
       }else{
-        console.log("Is New");
+        // console.log("Is New");
         this.administratorService.createUser(this.administrator).subscribe(data => {
           this.confirmAdd.emit(true);
           this.closeModal();
         }, (error: HttpErrorResponse) => {
-          console.log(error);
+          // console.log(error);
         });
       }
     }
@@ -68,7 +68,6 @@ export class ModalAdminComponent implements OnInit {
   }
 
   closeModal(){
-    console.log("close modal");
     this.administratorForm.reset();
     this.administrator = Object.assign({});
     this.btnClose.nativeElement.click();

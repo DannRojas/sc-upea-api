@@ -1,6 +1,6 @@
 export interface InscriptionInterface{
     id_incripcion?: number;
-    CapacitacionId?: number;
+    capacitacionId?: number;
     personaId?: number;
     fecha_insc?: Date;
     m_cancelado?: number; 
