@@ -8,31 +8,23 @@
   },
   "properties": {
     "id_estudiante": {
-      "type": "string",
+      "type": "number",
       "id": true
     },
     "ci": {
-      "type": "number",
-      "required": true
-    },
-    "expedido": {
       "type": "string",
       "required": true
     },
-    "nombre": {
+    "nombres": {
       "type": "string",
       "required": true
     },
-    "paterno": {
+    "apellidos": {
       "type": "string",
       "required": true,
       "default": "materno"
     },
-    "materno": {
-      "type": "string",
-      "required": true
-    },
-    "estado": {
+    "descripcion": {
       "type": "string",
       "required": true
     }
