@@ -1,3 +1,4 @@
+import { ToastrService } from 'ngx-toastr';
 import { isNullOrUndefined } from 'util';
 import { AdministratorInterface } from './../../models/administrator';
 import { Component, OnInit, ViewChild } from '@angular/core';
@@ -12,7 +13,7 @@ import { Router, NavigationStart, NavigationEnd } from '@angular/router';
 })
 export class NavigationComponent implements OnInit {
 
-  constructor(public authService: AuthService, private router: Router) { }
+  constructor(public authService: AuthService, private router: Router, private toastrService: ToastrService) { }
 
   @ViewChild(LoginComponent)
   loginComponent: LoginComponent;
@@ -24,25 +25,14 @@ export class NavigationComponent implements OnInit {
   ngOnInit(): void {
     this.getCurrentUser();
     this.authService.loading$.subscribe((loading:boolean)=>{
-      // console.log(loading);
       this.loading = loading;
     })
-    // this.router.events.subscribe(event => {
-    //   if(event instanceof NavigationStart){
-    //     this.loading = true;
-    //   }else if(event instanceof NavigationEnd){
-    //     this.loading = false;
-    //   }
-    //   console.log(this.loading);
-    // })
   }
 
   getCurrentUser(){
     if(!isNullOrUndefined(this.authService.getCurrentUser())){
       this.administrator = this.authService.getCurrentUser();
       this.isLogin = true;
-    }else{
-      this.router.navigate(["/"]);
     }
   }
 
@@ -52,7 +42,11 @@ export class NavigationComponent implements OnInit {
 
   onLogout():void {
     this.authService.logoutUser().subscribe(data => data);
-    location.reload();
+    this.router.navigate(["/"]);
+    this.toastrService.info("Por favor espere", "Saliendo...");
+    setTimeout(() => {
+      location.reload();
+    }, 1000);
   }
 
 }

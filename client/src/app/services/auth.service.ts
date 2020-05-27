@@ -62,7 +62,6 @@ export class AuthService {
 
   logoutUser():Observable<any> {
     let accessToken = localStorage.getItem('accessToken');
-    console.log(accessToken);
     const url_api = `${this.url_api}/logout?access_token=${accessToken}`;
     localStorage.removeItem('accessToken');
     localStorage.removeItem('currentUser');

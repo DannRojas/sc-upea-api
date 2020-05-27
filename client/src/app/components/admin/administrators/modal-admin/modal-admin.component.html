@@ -75,9 +75,11 @@
                             </mat-form-field>
                             <mat-form-field class="w-75">
                                 <mat-label>Password:</mat-label>
-                                <input type="password" matInput placeholder="Contraseña de Administrador"
-                                    name="password" [(ngModel)]="administrator.password" #password="ngModel" required
-                                    minlength="5">
+                                <input [type]="hide ? 'password' : 'text'" matInput placeholder="Contraseña de Administrador" name="password" [(ngModel)]="administrator.password" #password="ngModel" required minlength="5">
+                                <button type="button" mat-icon-button matSuffix (click)="hide = !hide"
+                                    [attr.aria-label]="'Hide password'" [attr.aria-pressed]="hide">
+                                    <mat-icon>{{hide ? 'visibility_off' : 'visibility'}}</mat-icon>
+                                </button>
                                 <mat-error *ngIf="password.hasError('required')">El password es requerido</mat-error>
                                 <mat-error *ngIf="password.hasError('minlength')">El password debe tener almenos 5
                                     carácteres</mat-error>

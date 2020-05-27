@@ -24,6 +24,9 @@ export class HomeComponent implements OnInit, OnDestroy {
   @ViewChild(InscriptionModalComponent)
   inscriptionModalComponent: InscriptionModalComponent;
 
+  private currentDate = new Date();
+  private orderCapacitations: CapacitationInterface[];
+
   ngOnInit(): void {
     this.authService.loading$.emit(true);
     this.getListCapacitations();
@@ -34,6 +37,9 @@ export class HomeComponent implements OnInit, OnDestroy {
     this.capacitationService.getAllCapacitations().subscribe(data => {
       this.imageService.getAllImages(data).pipe(takeUntil(this.unsubscribe$)).subscribe(capacitations => {
         this.capacitations = capacitations;
+
+        // this.sort(capacitations);
+        // console.log(this.capacitations);
         this.authService.loading$.emit(false);
         for (let i in this.capacitations) {
           this.capacitations[i].fecha_inicio = new Date(this.capacitations[i].fecha_inicio);
@@ -45,13 +51,36 @@ export class HomeComponent implements OnInit, OnDestroy {
     });
   }
 
+  // sort(capacitations: CapacitationInterface[]){
+  //   let aux = 0, cont = 0, capacit: CapacitationInterface;
+  //   capacitations.map(capacitation => {
+  //     capacitation.fecha_fin_insc = new Date(capacitation.fecha_fin_insc);
+  //   })
+  //   for(let j = 0; j<capacitations.length; j++){
+  //     for(let i=j; i<capacitations.length; i++){
+  //       if(capacitations[i].fecha_fin_insc.getTime()>aux){
+  //         capacit = capacitations[i];
+  //         capacitations[i] = capacitations[cont];
+  //         capacitations[cont] = capacit;
+  //         aux = capacitations[i].fecha_fin_insc.getTime();
+  //       }
+  //     }
+  //     aux = 0;
+  //   }
+  //   console.log(capacitations);
+  // }
+
   ngOnDestroy(): void {
     this.unsubscribe$.next();
     this.unsubscribe$.complete();
   }
 
   onEnroll(capacitation: CapacitationInterface){
-    this.inscriptionModalComponent.openModal(capacitation);
+    if(capacitation.fecha_fin_insc.getFullYear()>=this.currentDate.getFullYear() && capacitation.fecha_fin_insc.getMonth()>=this.currentDate.getMonth() && capacitation.fecha_fin_insc.getDate()>=this.currentDate.getDate()){
+      this.inscriptionModalComponent.openModal(capacitation);
+    }else{
+      this.toastrService.warning("Las fechas de inscripción para esta capacitación terminaron", "Fecha terminada", {closeButton: true, timeOut: 6000 })
+    }
   }
 
 }

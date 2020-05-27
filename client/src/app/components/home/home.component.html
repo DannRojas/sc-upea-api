@@ -28,8 +28,7 @@
         <div class="col-lg-7 col-md-12 col-sm-12">
             <div id="carouselExampleFade" class="carousel slide carousel-fade" data-ride="carousel">
                 <div class="carousel-inner">
-                    <div class="carousel-item" [class.active]="isfirst"
-                        *ngFor="let capacitation of capacitations; first as isfirst">
+                    <div class="carousel-item" [class.active]="isfirst" *ngFor="let capacitation of capacitations; first as isfirst">
                         <img [src]="capacitation.pathImagen" class="d-block img-slider img-fluid">
                     </div>
                 </div>
@@ -55,7 +54,8 @@
                         <div class="col-6 my-auto">
                             <h2 class="font-weight-bold name-cap mb-1">{{capacitation.nombre}}</h2>
                             <small>{{capacitation.descripcion}}</small>
-                            <h3 class="font-weight-bold">Precio {{capacitation.costo}} Bs.</h3>
+                            <!-- <h3 class="font-weight-bold">Precio {{capacitation.costo}} Bs.</h3> -->
+                            <h3 class="font-weight-bold">{{capacitation.costo===0 ? 'Gratuito' : 'Costo '+capacitation.costo+' Bs.'}}</h3>
                         </div>
                         <div class="col-6 my-auto">
                             <h4 class="font-weight-bold mb-0">Lugar:</h4>

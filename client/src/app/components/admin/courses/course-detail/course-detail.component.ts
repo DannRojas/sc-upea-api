@@ -50,7 +50,7 @@ export class CourseDetailComponent implements OnInit {
       this.isUpdate = true;
       this.isDisabled = true;
     }else{
-      this.capacitation.pathImagen = "../../../../assets/img/404imagen.png";
+      this.capacitation.pathImagen = "assets/img/404imagen.png";
       this.isUpdate = false;
       this.isDisabled = false;
       this.authService.loading$.emit(false);
@@ -83,7 +83,7 @@ export class CourseDetailComponent implements OnInit {
         this.capacitation.pathImagen = reader.result.toString();
       }
     }catch(e) {
-      this.capacitation.pathImagen = "../../../../assets/img/404imagen.png";
+      this.capacitation.pathImagen = "assets/img/404imagen.png";
     }
   }
 
@@ -149,7 +149,6 @@ export class CourseDetailComponent implements OnInit {
               }
             }
           })
-          console.log(this.inscPeoples);
         })
       }else{
         this.inscPeoples = [];
@@ -159,10 +158,6 @@ export class CourseDetailComponent implements OnInit {
 
   onPreDeleteInscription( inscriptionPeople: InscriptionPeopleInterface){
     this.inscription.id_inscripcion = inscriptionPeople.id_inscripcion;
-    // this.inscription.capacitacionId = inscriptionPeople.capacitacionId;
-    // this.inscription.personaId = inscriptionPeople.personaId;
-    // this.inscription.fecha_insc = inscriptionPeople.fecha_insc;
-    // this.inscription.m_cancelado = inscriptionPeople.m_cancelado;
     this.confirmModal.onPreConfirm("¿Está seguro de que desea eliminar la inscripción de "+inscriptionPeople.nombres+"?");
   }
 

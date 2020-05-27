@@ -6,11 +6,14 @@ import { CoursesComponent } from './components/admin/courses/courses.component';
 import { CourseDetailComponent } from './components/admin/courses/course-detail/course-detail.component';
 import { AdministratorsComponent } from './components/admin/administrators/administrators.component';
 
+import { AuthGuard } from './guards/auth.guard';
+import { AdminGuard } from './guards/admin.guard';
+
 const routes: Routes = [
   { path: '', component: HomeComponent },
-  { path: 'courses', component: CoursesComponent },
-  { path: 'course/:id', component: CourseDetailComponent },
-  { path: 'administrator', component: AdministratorsComponent },
+  { path: 'courses', component: CoursesComponent, canActivate: [AuthGuard] },
+  { path: 'course/:id', component: CourseDetailComponent, canActivate: [AuthGuard] },
+  { path: 'administrator', component: AdministratorsComponent, canActivate: [AdminGuard] },
   // { path: 'administrator', component: AdministratorsComponent },
 ];
 

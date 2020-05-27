@@ -48,7 +48,7 @@ export class GeneratorPDF {
         })
 
         pdf.add(
-            await new Img('./../../assets/png/header.png').height(100).width(550).alignment("left").margin([0, 0, 30, 0]).build()
+            await new Img('assets/png/header.png').height(100).width(550).alignment("left").margin([0, 0, 30, 0]).build()
         );
 
         pdf.add([

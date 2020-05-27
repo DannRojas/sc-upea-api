@@ -34,17 +34,13 @@ export class LoginComponent implements OnInit {
 
   onLogin() {
     if (this.loginForm.valid) {
-      let userName:string = this.loginForm.value.userName.toLowerCase();
-      let userPassword:string = this.loginForm.value.userPassword.toLowerCase();
-      return this.authService.loginUser(userName, userPassword).subscribe(data => {
-        console.log(data.user);
+      return this.authService.loginUser(this.loginForm.value.userName, this.loginForm.value.userPassword).subscribe(data => {
         this.authService.setUser(data.user);
         const token = data.id;
         this.authService.setToken(token);
         location.reload();
       },
         error => {
-          console.log(error);
           this.isError = true;
         }
       )

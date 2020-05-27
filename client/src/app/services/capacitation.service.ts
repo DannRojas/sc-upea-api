@@ -38,11 +38,11 @@ export class CapacitationService {
     // console.log("new capacitation");
     this.onPreAddOrUpdate(capacitation);
     const token = this.authService.getToken();
-    return this.http.post<CapacitationInterface>(this.url_api, this.capacitation);
+    const url_api = `${this.url_api}?access_token=${token}`;
+    return this.http.post<CapacitationInterface>(url_api, this.capacitation, { headers: this.headers });
   }
 
   updateCapacitation(capacitation: CapacitationInterface): Observable<CapacitationInterface> {
-    // console.log("update capacitation");
     this.onPreAddOrUpdate(capacitation);
     const token = this.authService.getToken();
     const url_api = `${this.url_api}/${capacitation.id_capacitacion}/?access_token=${token}`;
@@ -53,6 +53,12 @@ export class CapacitationService {
     //TODO: get token
     const token = this.authService.getToken();
     const url_api = `${this.url_api}/${id}?access_token=${token}`;
+    return this.http.delete(url_api, { headers: this.headers }).pipe(map(data => data));
+  }
+
+  deleteIncriptionOfCapacitations(id: number){
+    const token = this.authService.getToken();
+    const url_api = `${this.url_api}/${id}/inscripciones?access_token=${token}`;
     return this.http.delete(url_api, { headers: this.headers }).pipe(map(data => data));
   }
 

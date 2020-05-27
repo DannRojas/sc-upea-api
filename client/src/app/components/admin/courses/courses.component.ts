@@ -1,3 +1,4 @@
+import { ToastrService } from 'ngx-toastr';
 import { AdministratorInterface } from './../../../models/administrator';
 import { AuthService } from 'src/app/services/auth.service';
 import { ConfirmModalComponent } from './../confirm-modal/confirm-modal.component';
@@ -18,7 +19,7 @@ export class CoursesComponent implements OnInit, OnDestroy {
   private unsubscribe$ = new Subject<void>();
   public capacitations: CapacitationInterface[];
 
-  constructor(private capacitationService: CapacitationService, private imageService: ImageService, private authService: AuthService) { }
+  constructor(private capacitationService: CapacitationService, private imageService: ImageService, private authService: AuthService, private toastrService: ToastrService) { }
 
   @ViewChild(ConfirmModalComponent)
   confirmModal: ConfirmModalComponent;
@@ -71,8 +72,13 @@ export class CoursesComponent implements OnInit, OnDestroy {
 
   onDeleteCapacitation(confirmAction: boolean){
     if(confirmAction){
-      this.imageService.deleteImage(this.selectedCapacitation.imagen).subscribe(deleteImage => {
-        this.capacitationService.deleteCapacitation(this.selectedCapacitation.id_capacitacion).subscribe(deleteCapacitation => this.ngOnInit())
+      this.capacitationService.deleteIncriptionOfCapacitations(this.selectedCapacitation.id_capacitacion).subscribe(data => {
+        this.imageService.deleteImage(this.selectedCapacitation.imagen).subscribe(deleteImage => {
+          this.capacitationService.deleteCapacitation(this.selectedCapacitation.id_capacitacion).subscribe(deleteCapacitation => {
+            this.toastrService.success("se ha eliminado la capacitación exitosamente");
+            this.ngOnInit()
+          });
+        })
       })
     }else{
       this.selectedCapacitation = Object.assign({});

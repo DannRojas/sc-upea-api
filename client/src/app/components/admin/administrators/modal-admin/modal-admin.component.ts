@@ -20,10 +20,9 @@ export class ModalAdminComponent implements OnInit {
   constructor(private administratorService: AuthService) { }
 
   public administrator: AdministratorInterface = {};
-
   public types: Type[] = [{value: "super-administrador", showValue: "Super-Administrador"}, {value: "administrador", showValue: "Administrador"}, {value: "propietario", showValue: "Propietario"}];
-
   public isUpdate:boolean;
+  public hide:boolean = true;
 
   @ViewChild('btnOpen')
   btnOpen: ElementRef;
@@ -42,7 +41,6 @@ export class ModalAdminComponent implements OnInit {
   onAddOrUpdateAdministrator(){
     if(this.administratorForm.valid){
       if(this.isUpdate){
-        // console.log("Is Update");
         this.administratorService.updateUser(this.administrator).subscribe(data => {
           this.confirmAdd.emit(true);
           this.closeModal();
@@ -50,12 +48,11 @@ export class ModalAdminComponent implements OnInit {
           console.log(error);
         })
       }else{
-        // console.log("Is New");
         this.administratorService.createUser(this.administrator).subscribe(data => {
           this.confirmAdd.emit(true);
           this.closeModal();
         }, (error: HttpErrorResponse) => {
-          // console.log(error);
+          console.log(error);
         });
       }
     }
