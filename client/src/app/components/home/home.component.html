@@ -28,8 +28,14 @@
         <div class="col-lg-7 col-md-12 col-sm-12">
             <div id="carouselExampleFade" class="carousel slide carousel-fade" data-ride="carousel">
                 <div class="carousel-inner">
-                    <div class="carousel-item" [class.active]="isfirst" *ngFor="let capacitation of capacitations; first as isfirst">
-                        <img [src]="capacitation.pathImagen" class="d-block img-slider img-fluid">
+                    <div class="carousel-item active">
+                        <img src="assets/carousel/upea.jpg" class="d-block img-slider img-fluid">
+                    </div>
+                    <div class="carousel-item">
+                        <img src="assets/carousel/upea1.jpeg" class="d-block img-slider img-fluid">
+                    </div>
+                    <div class="carousel-item">
+                        <img src="assets/carousel/upea2.png" class="d-block img-slider img-fluid">
                     </div>
                 </div>
                 <a class="carousel-control-prev" href="#carouselExampleFade" role="button" data-slide="prev">
