@@ -1,4 +1,4 @@
-import { AuthService } from './../../../services/auth.service';
+import { AuthService } from '../../../services/auth.service';
 import { Component, OnInit, ViewChild, ElementRef } from '@angular/core';
 import { FormGroup, Validators, FormBuilder, NgForm } from '@angular/forms';
 
@@ -42,6 +42,9 @@ export class LoginComponent implements OnInit {
       },
         error => {
           this.isError = true;
+          setTimeout(()=> {
+            this.isError = false;
+          }, 5000)
         }
       )
     }

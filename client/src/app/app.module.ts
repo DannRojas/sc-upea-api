@@ -12,7 +12,7 @@ import { MaterialModule } from './material';
 import { HomeComponent } from './components/home/home.component';
 import { FooterComponent } from './components/footer/footer.component'
 import { HttpClientModule } from '@angular/common/http';
-import { LoginComponent } from './components/profile/login/login.component';
+import { LoginComponent } from './components/user/login/login.component';
 import { NavigationComponent } from './components/navigation/navigation.component';
 import { CoursesComponent } from './components/admin/courses/courses.component';
 import { AdministratorsComponent } from './components/admin/administrators/administrators.component';
@@ -23,7 +23,8 @@ import { ConfirmModalComponent } from './components/admin/confirm-modal/confirm-
 import { ModalInscriptionComponent } from './components/admin/courses/modal-inscription/modal-inscription.component';
 
 import { PdfMakeWrapper } from 'pdfmake-wrapper';
-import pdfFonts from "pdfmake/build/vfs_fonts"; // fonts provided for pdfmake
+import pdfFonts from "pdfmake/build/vfs_fonts";
+import { ProfileComponent } from './components/user/profile/profile.component'; // fonts provided for pdfmake
  
 // Set the fonts to use
 PdfMakeWrapper.setFonts(pdfFonts);
@@ -41,7 +42,8 @@ PdfMakeWrapper.setFonts(pdfFonts);
     ModalAdminComponent,
     InscriptionModalComponent,
     ConfirmModalComponent,
-    ModalInscriptionComponent
+    ModalInscriptionComponent,
+    ProfileComponent
   ],
   imports: [
     BrowserModule,

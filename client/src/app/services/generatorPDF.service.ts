@@ -63,13 +63,13 @@ export class GeneratorPDF {
             new Table([
                 [
                     new Cell(new Txt('Nombre').bold().end).fillColor('#dbd9d9').end,
-                    new Cell(new Txt('Costo').bold().end).fillColor('#dbd9d9').end,
                     new Cell(new Txt('Expositor').bold().end).fillColor('#dbd9d9').end,
                     new Cell(new Txt('Lugar').bold().end).fillColor('#dbd9d9').end,
                     new Cell(new Txt('Inicio').bold().end).fillColor('#dbd9d9').end,
-                    new Cell(new Txt('Hora').bold().end).fillColor('#dbd9d9').end
+                    new Cell(new Txt('Hora').bold().end).fillColor('#dbd9d9').end,
+                    new Cell(new Txt('Costo').bold().end).fillColor('#dbd9d9').end
                 ],
-                [`${capacitation.nombre}`, `${capacitation.costo}`, `${capacitation.expositor}`, `${capacitation.lugar}`, `${this.getDateInit(capacitation.fecha_inicio)}`, `${capacitation.hora}`]
+                [`${capacitation.nombre}`, `${capacitation.expositor}`, `${capacitation.lugar}`, `${this.getDateInit(capacitation.fecha_inicio)}`, `${capacitation.hora}`, `Bs. ${capacitation.costo}`]
             ]).widths(['*', '*', '*', '*', '*', '*']).dontBreakRows(true).end
         ])
 

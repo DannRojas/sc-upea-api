@@ -43,6 +43,12 @@ export class AuthService {
     const url_api = `${this.url_api}/${administrator.id_administrador}?access_token=${accessToken}`;
     return this.http.put<AdministratorInterface>(url_api, administrator, {headers: this.headers});
   }
+
+  changePassword(oldPassword: string, newPassword: string){
+    const token = this.getToken();
+    const url_api = `${this.url_api}/change-password?access_token=${token}`;
+    return this.http.post(url_api, {oldPassword: oldPassword, newPassword: newPassword}, {headers: this.headers});
+  }
   
   deleteUser(idUser: number){
     const accessToken = localStorage.getItem('accessToken');

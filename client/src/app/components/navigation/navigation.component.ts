@@ -3,8 +3,8 @@ import { isNullOrUndefined } from 'util';
 import { AdministratorInterface } from './../../models/administrator';
 import { Component, OnInit, ViewChild } from '@angular/core';
 import { AuthService } from 'src/app/services/auth.service';
-import { LoginComponent } from '../profile/login/login.component';
-import { Router, NavigationStart, NavigationEnd } from '@angular/router';
+import { LoginComponent } from '../user/login/login.component';
+import { Router } from '@angular/router';
 
 @Component({
   selector: 'app-navigation',

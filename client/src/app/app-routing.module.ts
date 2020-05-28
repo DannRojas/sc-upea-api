@@ -1,3 +1,4 @@
+import { ProfileComponent } from './components/user/profile/profile.component';
 import { NgModule } from '@angular/core';
 import { Routes, RouterModule } from '@angular/router';
 
@@ -11,6 +12,7 @@ import { AdminGuard } from './guards/admin.guard';
 
 const routes: Routes = [
   { path: '', component: HomeComponent },
+  { path: 'profile', component: ProfileComponent, canActivate: [AuthGuard] },
   { path: 'courses', component: CoursesComponent, canActivate: [AuthGuard] },
   { path: 'course/:id', component: CourseDetailComponent, canActivate: [AuthGuard] },
   { path: 'administrator', component: AdministratorsComponent, canActivate: [AdminGuard] },

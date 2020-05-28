@@ -24,6 +24,7 @@
         <a class="nav-link dropdown-toggle" id="navbarDropdown" role="button" data-toggle="dropdown" data-display="static" aria-haspopup="true" aria-expanded="false">
           <i class="fas fa-user-tie"></i> {{administrator.nombres}}</a>
         <div class="dropdown-menu" aria-labelledby="navbarDropdown">
+          <a class="dropdown-item text-center" routerLink="/profile">Perfil Usuario</a>
           <a class="dropdown-item text-center" (click)="onLogout()">Cerrar Sesión</a>
         </div>
       </li>

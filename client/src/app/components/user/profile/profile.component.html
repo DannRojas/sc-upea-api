@@ -1,0 +1,53 @@
+<div class="container mt">
+    <div class="row">
+        <div class="col-lg-6 col-md-6 my-5">
+            <div class="card bg-dark-strong white-text">
+                <div class="card-body">
+                    <h3 class="card-title text-center font-weight-bold"><i class="fas fa-user-tie"></i> {{user.nombres+' '+user.apellidos}}</h3>
+                    <ul>
+                        <li>{{user.ci}}</li>
+                        <li>{{user.celular}}</li>
+                        <li>{{user.email}}</li>
+                        <li>{{user.tipo}}</li>
+                    </ul>
+                </div>
+            </div>
+        </div>
+        
+        <div class="col-lg-6 col-md-6 my-5">
+            <div class="card bg-dark-strong white-text">
+                <div class="card-body">
+                    <h3 class="card-title text-center font-weight-bold">Cambiar contraseña</h3>
+                    <div class="text-center">
+                        <small> Cambie su contraseña bajo su propio riesgo</small>
+                    </div>
+                    <form class="text-center" #passwordForm="ngForm" (ngSubmit)="onChangePassword()">
+                        <mat-form-field class="w-75">
+                            <mat-label>Contraseña actual</mat-label>
+                            <input matInput [type]="hideOldPassword ? 'password' : 'text'" [disabled]="isDisabled" placeholder="*****" name="old_password" [(ngModel)]="oldPassword" #old_password="ngModel" required minlength="5">
+                            <button type="button" mat-icon-button matSuffix (click)="hideOldPassword = !hideOldPassword" [attr.aria-label]="'Hide password'" [attr.aria-pressed]="hideOldPassword"><mat-icon>{{hideOldPassword ? 'visibility_off' : 'visibility'}}</mat-icon></button>
+                            <mat-error *ngIf="old_password.hasError('required')">Es requerido</mat-error>
+                            <mat-error *ngIf="old_password.hasError('minlength')">Debe tener almenos 5 caracteres</mat-error>
+                        </mat-form-field>
+                        <mat-form-field class="w-75">
+                            <mat-label>Contraseña nueva</mat-label>
+                            <input matInput [type]="hideNewPassword ? 'password' : 'text'" [disabled]="isDisabled" placeholder="*****" name="new_password"
+                                [(ngModel)]="newPassword" #new_password="ngModel" required minlength="5">
+                            <button type="button" mat-icon-button matSuffix (click)="hideNewPassword = !hideNewPassword" [attr.aria-label]="'Hide password'" [attr.aria-pressed]="hideNewPassword"><mat-icon>{{hideNewPassword ? 'visibility_off' : 'visibility'}}</mat-icon></button>
+                            <mat-error *ngIf="new_password.hasError('required')">Es requerido</mat-error>
+                            <mat-error *ngIf="new_password.hasError('minlength')">Debe tener almenos 5 caracteres</mat-error>
+                        </mat-form-field>
+                        <div class="row mt-2">
+                            <div class="mx-auto col-6">
+                                <button type="button" (click)="onResetForm()" class="btn btn-purple text-white">{{isDisabled ? 'Activar edición' : 'Desactivar edición'}}</button>
+                            </div>
+                            <div class="mx-auto col-6" *ngIf="!isDisabled">
+                                <button type="submit" class="btn btn-purple text-white">Confirmar</button>
+                            </div>
+                        </div>
+                    </form>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
